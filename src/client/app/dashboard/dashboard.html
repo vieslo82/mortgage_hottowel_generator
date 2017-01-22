@@ -25,27 +25,37 @@
       </div>
       <div class="row">
         <div class="col-md-6">
-          <div class="widget wviolet">
-            <div ht-widget-header title="People" allow-collapse="true"></div>
+          <div class="widget wgreen">
+            <div ht-widget-header title="{{vm.mortgageInfo.title}}" allow-collapse="true"></div>
             <div class="widget-content text-center text-info">
-              <table class="table table-condensed table-striped">
-                <thead>
-                  <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Age</th>
-                    <th>Location</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="p in vm.people">
-                    <td>{{p.firstName}}</td>
-                    <td>{{p.lastName}}</td>
-                    <td>{{p.age}}</td>
-                    <td>{{p.location}}</td>
-                  </tr>
-                </tbody>
-              </table>
+                <table class="table table-condensed table-striped" >
+                 <thead>
+                   <tr>
+                     <th>IdHipoteca</th>
+                     <th>DNI</th>
+                     <th>Nom i cognoms</th>
+                     <th>Capital</th>
+                     <th>Tipus d'interés</th>
+                     <th>Quota</th>
+                     <th>Borrar</th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                   <tr ng-repeat="hipo in vm.mortgagesList" >
+                     <td><a ui-sref="hipotecaEdit({idHipoteca: hipo.$id})">{{$index+1}}</a></td>
+                     <td>{{hipo.nif}}</td>
+                     <td>{{hipo.nombre}} {{hipo.ape1}} {{hipo.ape2}}</td>
+                     <td>{{hipo.dadesEconomiques.capital|currency:'€'}}</td>
+                     <td>{{hipo.interesAplicat}}</td>
+                     <td>{{hipo.quotaMensual}}</td>
+
+                     <td>
+                         <a><i class="fa fa-trash-o" ng-click="vm.mortgagesList.$remove(hipo)" aria-hidden="true"></i></a>
+                        <!-- <button class="btn btn-danger" ng-click="vm.mortgagesList.$remove(hipo)" aria-label="Remove">X</button> -->
+                     </td>
+                   </tr>
+                 </tbody>
+               </table>
             </div>
             <div class="widget-foot">
               <div class="clearfix"></div>
@@ -53,15 +63,7 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div class="widget wgreen">
-            <div ht-widget-header title="{{vm.news.title}}" allow-collapse="true"></div>
-            <div class="widget-content text-center text-info">
-              <small>{{vm.news.description}}</small>
-            </div>
-            <div class="widget-foot">
-              <div class="clearfix"></div>
-            </div>
-          </div>
+            <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'></ui-gmap-google-map>
         </div>
       </div>
     </div>

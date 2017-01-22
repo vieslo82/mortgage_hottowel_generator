@@ -17,7 +17,11 @@
     -webkit-font-smoothing: antialiased;
     /*font-weight: 400;*/
 }
-
+.angular-google-map-container { height: 400px; }
+.form-group.required .control-label:after {
+       content:"*";
+       color:red;
+ }
 .btn, .badge, .modal, .modal-dialog, .modal-content,
 input, select {
     -ms-border-radius: 0 !important;
@@ -36,6 +40,9 @@ input, select {
     -webkit-text-shadow: none !important;
     -ms-text-shadow: none !important;
     text-shadow: none !important;
+}
+.nav li a {
+        padding-left: 40px;
 }
 
 form * {
@@ -378,7 +385,7 @@ form {
     margin-left: 15px;
 }
 
-.form-horizontal .control-label {
+/*.form-horizontal .control-label {
     width: 90px;
 }
 
@@ -392,7 +399,7 @@ form {
 
 .form-horizontal .form-actions {
     padding-left: 110px;
-}
+}*/
 
 .form-actions {
     padding: 5px 20px 5px;
@@ -791,7 +798,7 @@ form {
 
 .mainbar {
     position: relative;
-    margin-left: 230px;
+    //margin-left: 230px;
     margin-right: 0;
     width: auto;
     background: #fff;

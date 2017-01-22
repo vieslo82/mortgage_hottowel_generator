@@ -14,7 +14,7 @@
 
   var config = {
     appErrorPrefix: '[mortgageCalculator Error] ',
-    appTitle: 'mortgageCalculator'
+    appTitle: ' MORTGAGE CALCULATOR'
   };
 
   core.value('config', config);

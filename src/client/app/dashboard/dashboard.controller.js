@@ -1,3 +1,5 @@
+
+
 (function() {
   'use strict';
 
@@ -5,14 +7,25 @@
     .module('app.dashboard')
     .controller('DashboardController', DashboardController);
 
-  DashboardController.$inject = ['$q', 'dataservice', 'logger'];
+  DashboardController.$inject = ['$q', 'dataservice', 'logger', '$firebaseArray'];
   /* @ngInject */
-  function DashboardController($q, dataservice, logger) {
+  function DashboardController($q, dataservice, logger, $firebaseArray) {
     var vm = this;
-    vm.news = {
-      title: 'mortgageCalculator',
-      description: 'Hot Towel Angular is a SPA template for Angular developers.'
+    //Map centered on spain
+    vm.map = { center: { latitude: 39.5770969, longitude: -3.5280415 }, zoom: 6 };
+    
+    /*uiGmapIsReady.then(function(maps) {
+        vm.map = { center: { latitude: 39.5770969, longitude: -3.5280415 }, zoom: 6 };
+        console.log('Google Maps loaded');
+    });*/
+
+    vm.mortgageInfo = {
+      title: 'Mortgages List',
+      description: 'Preparing list'
     };
+    //vm.mortgagesList = [];
+    var ref = firebase.database().ref().child("hipotecas");
+    vm.mortgagesList = $firebaseArray(ref);
     vm.messageCount = 0;
     vm.people = [];
     vm.title = 'Dashboard';
@@ -20,6 +33,7 @@
     activate();
 
     function activate() {
+      //var promises = [getMessageCount(), getPeople(),getMortgages()];
       var promises = [getMessageCount(), getPeople()];
       return $q.all(promises).then(function() {
         logger.info('Activated Dashboard View');
@@ -39,5 +53,13 @@
         return vm.people;
       });
     }
+    function getMortgages() {
+        vm.mortgagesList = dataservice.getMortgages();
+        return vm.mortgagesList;
+    }
+    /*function getMortgagesFB() {
+        vm.mortgagesList = dataservice.getMortgagesFB();
+        return vm.mortgagesList;
+    }*/
   }
 })();

@@ -1,7 +1,7 @@
 /* jshint -W117, -W030 */
 describe('layout', function() {
   describe('sidebar', function() {
-    var controller;
+    /*var controller;
     var views = {
       dashboard: 'app/dashboard/dashboard.html',
       customers: 'app/customers/customers.html'
@@ -34,6 +34,6 @@ describe('layout', function() {
     it('should have isCurrent() for non route not return `current`', function() {
       $location.path('/invalid');
       expect(controller.isCurrent({ title: 'invalid' })).not.to.equal('current');
-    });
+  });*/
   });
 });

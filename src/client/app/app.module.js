@@ -6,6 +6,8 @@
     'app.widgets',
     'app.admin',
     'app.dashboard',
+    'app.contact',
+    'app.hipoteca',
     'app.layout'
   ]);
 

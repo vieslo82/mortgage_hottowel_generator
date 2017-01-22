@@ -1,5 +1,12 @@
 # mortgageCalculator
 
+ADDS
+-google analytics
+-Auth infrastructure
+-i18n
+-contact section
+-remove sidebar. Main menu on header
+
 **Generated from HotTowel Angular**
 
 >*Opinionated Angular style guide for teams by [@john_papa](//twitter.com/john_papa)*

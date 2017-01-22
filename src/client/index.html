@@ -5,7 +5,7 @@
   <style>
     /* This helps the ng-show/ng-hide animations start at the right place. */
     /* Since Angular has this but needs to load, this gives us the class early. */
-    
+
     .ng-hide {
       display: none!important;
     }
@@ -21,6 +21,8 @@
   <!-- build:css styles/lib.css -->
   <!-- bower:css -->
   <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
+  <link rel="stylesheet" href="/bower_components/bootstrap-social/bootstrap-social.css" />
   <link rel="stylesheet" href="/bower_components/toastr/toastr.css" />
   <!-- endbower -->
   <!-- endbuild -->
@@ -38,7 +40,7 @@
     <div id="splash-page" ng-show="showSplash">
       <div class="page-splash">
         <div class="page-splash-message">
-          mortgageCalculator
+          Mortgage Calculator
         </div>
         <div class="progress progress-striped active page-progress-bar">
           <div class="bar"></div>
@@ -46,12 +48,23 @@
       </div>
     </div>
   </div>
-
+  <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
   <!-- build:js js/lib.js -->
   <!-- bower:js -->
   <script src="/bower_components/jquery/dist/jquery.js"></script>
   <script src="/bower_components/angular/angular.js"></script>
   <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+  <script src="/bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
+  <script src="/bower_components/lodash/lodash.js"></script>
+  <script src="/bower_components/markerclustererplus/src/markerclusterer.js"></script>
+  <script src="/bower_components/google-maps-utility-library-v3-markerwithlabel/dist/markerwithlabel.js"></script>
+  <script src="/bower_components/google-maps-utility-library-v3-infobox/dist/infobox.js"></script>
+  <script src="/bower_components/google-maps-utility-library-v3-keydragzoom/dist/keydragzoom.js"></script>
+  <script src="/bower_components/js-rich-marker/src/richmarker.js"></script>
+  <script src="/bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+  <script src="/bower_components/firebase/firebase.js"></script>
+  <script src="/bower_components/angularfire/dist/angularfire.js"></script>
   <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="/bower_components/extras.angular.plus/ngplus-overlay.js"></script>
   <script src="/bower_components/moment/moment.js"></script>
@@ -69,8 +82,10 @@
   <script src="/src/client/app/blocks/exception/exception.module.js"></script>
   <script src="/src/client/app/blocks/logger/logger.module.js"></script>
   <script src="/src/client/app/blocks/router/router.module.js"></script>
+  <script src="/src/client/app/contact/contact.module.js"></script>
   <script src="/src/client/app/core/core.module.js"></script>
   <script src="/src/client/app/dashboard/dashboard.module.js"></script>
+  <script src="/src/client/app/hipoteca/hipoteca.module.js"></script>
   <script src="/src/client/app/layout/layout.module.js"></script>
   <script src="/src/client/app/widgets/widgets.module.js"></script>
   <script src="/src/client/app/admin/admin.controller.js"></script>
@@ -79,16 +94,21 @@
   <script src="/src/client/app/blocks/exception/exception.js"></script>
   <script src="/src/client/app/blocks/logger/logger.js"></script>
   <script src="/src/client/app/blocks/router/router-helper.provider.js"></script>
+  <script src="/src/client/app/contact/contact.controller.js"></script>
+  <script src="/src/client/app/contact/contact.route.js"></script>
   <script src="/src/client/app/core/config.js"></script>
   <script src="/src/client/app/core/constants.js"></script>
   <script src="/src/client/app/core/core.route.js"></script>
   <script src="/src/client/app/core/dataservice.js"></script>
+  <script src="/src/client/app/dashboard/configApiGoogleMaps.js"></script>
   <script src="/src/client/app/dashboard/dashboard.controller.js"></script>
   <script src="/src/client/app/dashboard/dashboard.route.js"></script>
-  <script src="/src/client/app/layout/ht-sidebar.directive.js"></script>
+  <script src="/src/client/app/hipoteca/hipoteca.controller.js"></script>
+  <script src="/src/client/app/hipoteca/hipoteca.route.js"></script>
+  <script src="/src/client/app/layout/bak/ht-sidebar.directive.js"></script>
   <script src="/src/client/app/layout/ht-top-nav.directive.js"></script>
+  <script src="/src/client/app/layout/mainmenu.controller.js"></script>
   <script src="/src/client/app/layout/shell.controller.js"></script>
-  <script src="/src/client/app/layout/sidebar.controller.js"></script>
   <script src="/src/client/app/widgets/ht-img-person.directive.js"></script>
   <script src="/src/client/app/widgets/ht-widget-header.directive.js"></script>
   <!-- endinject -->
@@ -96,6 +116,19 @@
   <!-- inject:templates:js -->
   <!-- endinject -->
   <!-- endbuild -->
+
+  <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <script>
+      !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+      (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+      r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+      }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-XXXXX-X');
+      ga('send', 'pageview');
+   </script>
+   <!-- Google Maps API -->
+   <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6b-K_LzG0Lt3OPmwbxlYe1FW67CXbrPY&callback=initMap"
+     async defer></script> -->
 </body>
 
 </html>
