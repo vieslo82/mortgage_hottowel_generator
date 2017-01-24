@@ -30,7 +30,7 @@
       <div class="form-group required">
           <label class="control-label col-sm-6">INTEREST RATE </label>
           <div class="col-sm-6">
-              <select ng-model="vm.hipoteca.dadesEconomiques.tipusInteres" name="interest_rate_type" id="interest_rate_type" class="form-control" ng-change="resetValues()">
+              <select ng-model="vm.hipoteca.dadesEconomiques.tipusInteres" name="interest_rate_type" id="interest_rate_type" class="form-control" ng-change="vm.resetValues()">
                   <option value="variable">variable</option>
                   <option value="fixed">fixed</option>
               </select>
