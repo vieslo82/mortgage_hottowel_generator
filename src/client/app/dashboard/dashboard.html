@@ -63,7 +63,12 @@
           </div>
         </div>
         <div class="col-md-6">
-            <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'></ui-gmap-google-map>
+            <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>
+                <!-- <ui-gmap-marker coords="vm.marker.coords" idKey='vm.marker.id' > -->
+                <ui-gmap-markers models="vm.randomMarkers" coords="'self'" icon="'icon'">
+                </ui-gmap-markers>
+            </ui-gmap-marker>
+            </ui-gmap-google-map>
         </div>
       </div>
     </div>

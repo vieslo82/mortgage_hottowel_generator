@@ -5,7 +5,7 @@
 <form name="mortgageForm" novalidate method="POST" class="form-horizontal" id="formulario_products"  ng-submit="vm.submitAndSaveHipoteca()" >
 
   <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-6">    
 <fieldset>
 
      <legend class="text-info">Economic data</legend>
@@ -76,7 +76,7 @@
 
 </fieldset>
 </div>
-<div class="col-sm-6">
+<div class="col-sm-6" ng-hide="$root.authUser">
 <fieldset>
 
     <legend class="text-info">Personal data</legend>

@@ -4,7 +4,7 @@
   angular
     .module('app.core')
     .factory('dataservice', dataservice)
-    .config(function() {
+    .config(function($httpProvider) {
         var config = {
             apiKey: 'AIzaSyA6b-K_LzG0Lt3OPmwbxlYe1FW67CXbrPY',
             authDomain: 'mortgage-calculator.firebaseapp.com',
@@ -13,31 +13,47 @@
             messagingSenderId: '978656105531'
         };
         firebase.initializeApp(config);
+
+        //================================================
+        // Add an interceptor for AJAX errors
+        //================================================
+
+        $httpProvider.interceptors.push(function($q,$location) {
+            return {
+               response: function(response) {
+                 // do something on success
+                 return response;
+               },
+               responseError: function(response) {
+                 if (response.status === 401){
+                   console.log('TETETETETETET');
+                   $location.url('/login');
+
+                   //$state.go('login');
+                 }
+                 return $q.reject(response);
+               }
+           };
+       });
     });
 
-  dataservice.$inject = ['$http', '$q', 'exception', 'logger','localStorageService'];
+  dataservice.$inject = ['$rootScope','$state','$window','$http', '$q', 'exception', 'logger','localStorageService'];
   /* @ngInject */
-  function dataservice($http, $q, exception, logger, localStorageService) {
-    //var fbDatabase = getFirebaseDatabase();
-
-    /*var hipotecasRef = fbDatabase.ref('hipotecas/');
-    var hipotecas = {};
-    hipotecasRef.once('value').then(function(snapshot) {
-        hipotecas = snapshot.val();
-    });*/
-
+  function dataservice($rootScope,$state,$window, $http, $q, exception, logger, localStorageService) {
 
     var service = {
       getPeople: getPeople,
       getMessageCount: getMessageCount,
-      getMortgages:getMortgages
-      //addMortgage:addMortgage
+      getCurrentPosition: getCurrentPosition,
+      checkLoggedin: checkLoggedin,
+      isLoggedin: isLoggedin,
+      logout: logout
     };
 
     return service;
 
     function getMessageCount() { return $q.when(72); }
-
+    //DEPRECATED
     function getPeople() {
       return $http.get('/api/people')
         .then(success)
@@ -51,48 +67,103 @@
         return exception.catcher('XHR Failed for getPeople')(e);
       }
     }
-    function getMortgages(idHipoteca){
-        var hipotecas=localStorageService.get('hipotecas') || [];
-        if (idHipoteca){
-            return hipotecas[idHipoteca];
+
+    //================================================
+    // Check if the user is connected
+    //================================================
+    function checkLoggedin(){
+      
+      return $http.get('/api/loggedin')
+        .then(success)
+        .catch(fail);
+
+      function success(responseUser) {
+         if (responseUser.data === '0'){
+             $rootScope.authUser = false;
+             $state.go('login');
         }else{
-            return hipotecas;
+            $rootScope.authUser = responseUser.data;
         }
+      }
+
+      function fail(e) {
+        return exception.catcher('XHR Failed for /api/loggedin')(e);
+      }
     }
 
-    /*function addMortgage(mortgage){
-        // Get a key for a new Hipoteca.
-      var newMortgageKey = fbDatabase.ref().child('hipotecas').push().key;
+    function isLoggedin(){      
+      return $http.get('/api/loggedin')
+        .then(success)
+        .catch(fail);
 
-      // Write the new post's data simultaneously in the posts list and the user's post list.
-      var updates = {};
-      updates['/hipotecas/' + newMortgageKey] = mortgage;
-      //updates['/user-hipotecas/' + uid + '/' + newHipotecaKey] = hipoteca;
-
-      return fbDatabase.ref().update(updates);
-    }*/
-
-    /*function getMortgagesFB(idMortgage){
-        if (idMortgage){
-            return hipotecas[idMortgage];
+      function success(responseUser) {
+         if (responseUser.data === '0'){
+              $rootScope.authUser = false;
+             return false;
         }else{
-            return hipotecas;
+          $rootScope.authUser = responseUser.data;
+          return responseUser.data;
         }
-    }*/
+      }
+
+      function fail(e) {
+        return exception.catcher('XHR Failed for /api/loggedin')(e);
+      }
+    }
+
+    function logout(){      
+      return $http({
+            url: '/api/logout',
+            method: 'POST'
+        })
+        .then(function(responseUser) {            
+            console.log('OKKK:'+responseUser);
+             $rootScope.authUser =false;
+            $state.go('/');
+
+       },
+       function(responseError) { // optional           
+           console.log('ERRRRROR: '+responseError);
+           //$state.go('login');
+       });
+    }
+
+    function getCurrentPosition(){
+        var deferred = $q.defer();
+
+       if (!$window.navigator.geolocation) {
+           deferred.reject('Geolocation not supported.');
+       } else {
+           $window.navigator.geolocation.getCurrentPosition(
+               function (position) {
+                   var markers = [];
+                   for (var i = 0; i < 50; i++) {
+                       var ret = {
+                           latitude: parseInt(position.coords.latitude)+Math.random(),
+                           longitude: parseInt(position.coords.longitude)+Math.random(),
+                           id: i,
+                           title: 'm' + i
+                       };
+
+                       markers.push(ret);
+                    }
+                    var home = {
+                        id: 51,
+                        latitude: position.coords.latitude,
+                        longitude:position.coords.longitude
+                    };
+
+                    markers.push(home);
+                    //markers.push = position;
+                   //deferred.resolve(position);
+                   deferred.resolve(markers);
+               },
+               function (err) {
+                   deferred.reject(err);
+               });
+       }
+       return deferred.promise;
+    }
   }
 
-  /*function getFirebaseDatabase(){
-      // Initialize Firebase
-      var config = {
-        apiKey: 'AIzaSyA6b-K_LzG0Lt3OPmwbxlYe1FW67CXbrPY',
-        authDomain: 'mortgage-calculator.firebaseapp.com',
-        databaseURL: 'https://mortgage-calculator.firebaseio.com',
-        storageBucket: 'firebase-mortgage-calculator.appspot.com',
-        messagingSenderId: '978656105531'
-      };
-      firebase.initializeApp(config);
-      // Get a reference to the database service
-      var database = firebase.database();
-      return database;
-  }*/
 })();

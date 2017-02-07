@@ -66,7 +66,11 @@
                     console.log("Error:", error);
                 });
             }else{//NEW MORTGAGE USER AUTHENTICATED
-                if (vm.authData) vm.hipoteca.nombre = vm.authData.displayName;
+                if (vm.authData) {
+                    //alert(JSON.stringify(vm.authData));
+                    vm.hipoteca.nombre = vm.authData.displayName;
+                    vm.hipoteca.email = vm.authData.providerData[0].email;
+                }
             }
 
 

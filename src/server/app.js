@@ -16,6 +16,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(logger('dev'));
 
+//NEW PERE
+var session = require('express-session');
+app.use(session({
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true,
+  cookie: { secure: false ,maxAge:120000}
+}));
+var passport = require('passport');
+app.use(passport.initialize()); // Add passport initialization
+app.use(passport.session());    // Add passport initialization
+//END NEW
+
 app.use('/api', require('./routes'));
 
 console.log('About to crank up node');

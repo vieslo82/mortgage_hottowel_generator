@@ -7,13 +7,13 @@
     .module('app.dashboard')
     .controller('DashboardController', DashboardController);
 
-  DashboardController.$inject = ['$q', 'dataservice', 'logger', '$firebaseArray'];
+  DashboardController.$inject = ['$window','$q', 'dataservice', 'logger', '$firebaseArray'];
   /* @ngInject */
-  function DashboardController($q, dataservice, logger, $firebaseArray) {
+  function DashboardController($window, $q, dataservice, logger, $firebaseArray) {
     var vm = this;
     //Map centered on spain
     vm.map = { center: { latitude: 39.5770969, longitude: -3.5280415 }, zoom: 6 };
-    
+
     /*uiGmapIsReady.then(function(maps) {
         vm.map = { center: { latitude: 39.5770969, longitude: -3.5280415 }, zoom: 6 };
         console.log('Google Maps loaded');
@@ -34,10 +34,24 @@
 
     function activate() {
       //var promises = [getMessageCount(), getPeople(),getMortgages()];
-      var promises = [getMessageCount(), getPeople()];
+      var promises = [getMessageCount(), getPeople(),getGeoPosition()];
       return $q.all(promises).then(function() {
         logger.info('Activated Dashboard View');
       });
+    }
+
+    //Passar a factory
+    function getGeoPosition(){
+        return dataservice.getCurrentPosition().then(function(data) {
+            /*vm.marker = {
+              id: 0,
+              coords: {
+                latitude: data.coords.latitude,
+                longitude: data.coords.longitude
+            }};*/
+            vm.randomMarkers = data;
+             return vm.randomMarkers;
+        });
     }
 
     function getMessageCount() {
@@ -57,9 +71,5 @@
         vm.mortgagesList = dataservice.getMortgages();
         return vm.mortgagesList;
     }
-    /*function getMortgagesFB() {
-        vm.mortgagesList = dataservice.getMortgagesFB();
-        return vm.mortgagesList;
-    }*/
   }
 })();

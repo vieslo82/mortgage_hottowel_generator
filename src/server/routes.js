@@ -2,8 +2,32 @@ var router = require('express').Router();
 var four0four = require('./utils/404')();
 var data = require('./data');
 
+var auth = require('./authentication');
+var passport = require('passport');
+
 router.get('/people', getPeople);
 router.get('/person/:id', getPerson);
+//===== NEW PERE ===========================================================
+// route to test if the user is logged in or not
+router.get('/loggedin', function(req, res) {
+  console.log('Logged in '+JSON.stringify(req.user));
+  res.send(req.isAuthenticated() ? req.user : '0');
+});
+
+// route to log in
+router.post('/login', passport.authenticate('local'), function(req, res) {
+  console.log('login '+JSON.stringify(req.user));
+  console.log('session '+JSON.stringify(req.session));
+  res.send(req.user);
+});
+
+// route to log out
+router.post('/logout', function(req, res){
+  req.logOut();
+  res.send(200);
+});
+//========= END NEW ====================================================
+
 router.get('/*', four0four.notFoundMiddleware);
 
 module.exports = router;

@@ -5,13 +5,13 @@
     .module('app.admin')
     .run(appRun);
 
-  appRun.$inject = ['routerHelper'];
+  appRun.$inject = ['routerHelper','dataservice'];
   /* @ngInject */
-  function appRun(routerHelper) {
-    routerHelper.configureStates(getStates());
+  function appRun(routerHelper,dataservice) {
+    routerHelper.configureStates(getStates(dataservice));
   }
 
-  function getStates() {
+  function getStates(dataservice) {
     return [
       {
         state: 'admin',
@@ -24,6 +24,10 @@
           settings: {
             nav: 3,
             content: '<i class="fa fa-lock"></i> Admin'
+          },
+
+          resolve:{
+              loggedin: dataservice.checkLoggedin
           }
         }
       }
