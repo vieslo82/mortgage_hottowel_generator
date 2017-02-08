@@ -11,6 +11,7 @@
     var vm = this;
 
     vm.login = login;
+    vm.loginTwitter = loginTwitter;
     //vm.logout = logout;
     // Register the login() function
     function login(){
@@ -23,7 +24,7 @@
         .then(function(responseUser) {
             vm.message = 'Authentication successful!';
             console.log('OKKK:'+responseUser);
-            
+
             $rootScope.authUser = responseUser.user;
             $state.go('admin');
             //$location.url('/admin   ');
@@ -38,12 +39,12 @@
     function loginTwitter(){
         $http({
             url: '/api/loginTwitter',
-            method: 'POST'           
+            method: 'POST'
         })
-        .then(function(responseUser) {   
-            console.log(" %j ",responseUser);    
+        .then(function(responseUser) {
+            console.log(" %j ",responseUser);
        },
-       function(responseError) { // optional        
+       function(responseError) { // optional
        });
     }
 
