@@ -2,36 +2,32 @@
   <section class="matter">
     <div class="container">
       <div class="row">
-        <div class="col-md-12">
-          <ul class="today-datas">
-            <li class="blightblue">
-              <div class="pull-left"><i class="fa fa-plane"></i></div>
-              <div class="datas-text pull-right">
-                <span class="bold">May 18 - 19, 2015</span> Castle Resort, Neverland
-              </div>
-              <div class="clearfix"></div>
-            </li>
-
-            <li class="borange">
-              <div class="pull-left"><i class="fa fa-envelope"></i></div>
-              <div class="datas-text pull-right">
-                <span class="bold">{{vm.messageCount}}</span> Messages
-              </div>
-              <div class="clearfix"></div>
-            </li>
-
-          </ul>
-        </div>
-      </div>
-      <div class="row">
         <div class="col-md-6">
-          <div class="widget wgreen">
+            
+             <div class"col-md-12">  
+                <div class="widget blightblue">
+                  
+                  <div class="widget-content text-center text-info" style="padding:2.5em">
+                        <span class="bold" style="color:white;font-size:1.8em;"><i class="fa fa-money fa-lg"> </i> ¿Do you have ground clause? Simulate your mortgage and get your money back!</span>
+                  </div>   
+
+                </div>
+              
+              
+                  <div class="widget bblue">               
+                  <div class="widget-content text-center text-info" style="padding:2.5em">
+                        <span class="bold" style="color:white;font-size:1.8em;"><i class="fa fa-money fa-lg"> </i> Recover set up mortgage costs too! There is judisprudence about it </span>
+                  </div>   
+                </div>
+              </div> 
+
+             <div class="col-md-12 widget wgreen">
             <div ht-widget-header title="{{vm.mortgageInfo.title}}" allow-collapse="true"></div>
             <div class="widget-content text-center text-info">
                 <table class="table table-condensed table-striped" >
                  <thead>
                    <tr>
-                     <th>IdHipoteca</th>
+                     <th>Id</th>
                      <th>DNI</th>
                      <th>Nom i cognoms</th>
                      <th>Capital</th>
@@ -60,16 +56,27 @@
             <div class="widget-foot">
               <div class="clearfix"></div>
             </div>
+          </div>  
+
+        
+
+        </div>
+         <div class="col-md-6">
+          <div class="widget borange">               
+               <div class="widget-content text-center text-info" style="padding:2.5em">
+                    <span class="bold" style="color:white;font-size:1.8em;"><i class="fa fa-balance-scale fa-lg"></i>&nbsp;{{vm.messageCount}} Mortgage Lawyers close to you. Get your money back faster</span>
+               </div>
           </div>
-        </div>
-        <div class="col-md-6">
-            <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>
-                <!-- <ui-gmap-marker coords="vm.marker.coords" idKey='vm.marker.id' > -->
-                <ui-gmap-markers models="vm.randomMarkers" coords="'self'" icon="'icon'">
-                </ui-gmap-markers>
-            </ui-gmap-marker>
-            </ui-gmap-google-map>
-        </div>
+          <div class="widget-content text-center text-info">
+                <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>
+                    <!-- <ui-gmap-marker coords="vm.marker.coords" idKey='vm.marker.id' > -->
+                    <ui-gmap-markers models="vm.randomMarkers" coords="'self'" icon="'icon'">
+                    </ui-gmap-markers>
+                </ui-gmap-marker>
+                </ui-gmap-google-map>
+            </div>
+        </div> 
+       
       </div>
     </div>
   </section>

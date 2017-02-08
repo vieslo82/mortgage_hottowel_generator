@@ -29,7 +29,7 @@
             //$location.url('/admin   ');
        },
        function(responseError) { // optional
-           vm.message = 'Authentication failed.';
+           vm.error = 'Authentication failed.';
            console.log('ERRRRROR: '+responseError);
            $state.go('login');
        });

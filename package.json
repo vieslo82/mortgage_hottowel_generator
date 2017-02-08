@@ -15,7 +15,8 @@
     "serve-favicon": "^2.0.1",
     "express-session":"*",
     "passport": "*",
-    "passport-local": "*"
+    "passport-local": "*",
+    "passport-twitter":"~1.0.4"
   },
   "devDependencies": {
     "browser-sync": "~2.11.2",

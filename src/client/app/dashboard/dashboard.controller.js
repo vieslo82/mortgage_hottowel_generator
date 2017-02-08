@@ -20,7 +20,7 @@
     });*/
 
     vm.mortgageInfo = {
-      title: 'Mortgages List',
+      title: 'Your Mortgages List simulations',
       description: 'Preparing list'
     };
     //vm.mortgagesList = [];
