@@ -34,6 +34,19 @@
            $state.go('login');
        });
     }
+
+    function loginTwitter(){
+        $http({
+            url: '/api/loginTwitter',
+            method: 'POST'           
+        })
+        .then(function(responseUser) {   
+            console.log(" %j ",responseUser);    
+       },
+       function(responseError) { // optional        
+       });
+    }
+
     /*function logout(){
 
         $http({
