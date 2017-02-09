@@ -147,18 +147,16 @@
                    var markers = [];
                   
                     getPeople().then(function(peopleArray) {
-                      var i=0;
+                      
                       peopleArray.forEach(function(value){
                           var ret = {
                            latitude: parseInt(value.latitude),
                            longitude: parseInt(value.longitude),
                            icon:'images/icon_lawyer.png',
                            info:value.firstName+" "+value.lastName+"<br>Age: "+value.age+"<br>Location:"+value.location,
-                           id: i,
-                           title: 'm' + i
-                         };
-                          
-                         i++;
+                           id: value.id
+                         };                       
+                      
                          markers.push(ret); 
                       });
                       var home = {
