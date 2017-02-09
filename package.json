@@ -16,7 +16,8 @@
     "express-session":"*",
     "passport": "*",
     "passport-local": "*",
-    "passport-twitter":"~1.0.4"
+    "passport-twitter":"~1.0.4",
+    "passport-facebook":"~2.1.1"
   },
   "devDependencies": {
     "browser-sync": "~2.11.2",

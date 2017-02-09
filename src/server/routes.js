@@ -10,7 +10,7 @@ router.get('/person/:id', getPerson);
 //===== NEW PERE ===========================================================
 // route to test if the user is logged in or not
 router.get('/loggedin', function(req, res) {
-  console.log('Logged in '+JSON.stringify(req.user));
+  console.log('Logged in EXPRESS'+JSON.stringify(req.user));
   res.send(req.isAuthenticated() ? req.user : '0');
 });
 
@@ -22,16 +22,36 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
 });
 
 // route to log in twitter
-router.post('/loginTwitter', passport.authenticate('twitter'), function(req, res) {
-  console.log('login '+JSON.stringify(req.user));
+/*router.get('/loginTwitter', passport.authenticate('twitter'), function(req, res) {
+  console.log('login EXPRESS ');
   console.log('session '+JSON.stringify(req.session));
   res.send(req.user);
-});
+});*/
 
+router.get('/loginTwitter',
+  passport.authenticate('twitter'));
+
+router.get('/auth/twitter/callback', 
+  passport.authenticate('twitter', { failureRedirect: '/login' }),
+  function(req, res) {
+    console.log('TWITTER login '+JSON.stringify(req.user));    
+    res.redirect('/');
+  });
+
+router.get('/loginFacebook',
+  passport.authenticate('facebook'));
+
+router.get('/auth/facebook/callback', 
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    console.log('Facebook login '+JSON.stringify(req.user));    
+    res.redirect('/');
+  });
 // route to log out
-router.post('/logout', function(req, res){
+router.get('/logout', function(req, res){
   req.logOut();
-  res.send(200);
+  res.redirect('/');
+  //res.send(200);
 });
 //========= END NEW ====================================================
 

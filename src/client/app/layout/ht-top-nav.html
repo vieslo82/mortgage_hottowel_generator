@@ -34,13 +34,14 @@
          <li ng-hide="$root.authUser" ui-sref="login"><a><i  class="fa fa-sign-in"></i> Sign in</a></li>
  
 
-        <!-- <li style="" ng-click="vm.singin('facebook')" ng-hide="$root.authUser" >
-            <a><span  class="fa fa-facebook fa-lg"></span>
-            </a>
-            
-        </li> -->
-        <li ui-sref="loginTwitter" ng-hide="$root.authUser" >
-            <a><span   class="fa fa-twitter fa-lg"></span>
+        <li ng-hide="$root.authUser" >
+            <a target="_self" href="api/loginFacebook"><span  class="fa fa-facebook fa-lg"></span>
+            </a>            
+        </li> 
+
+        <!-- <li ui-sref="loginTwitter" ng-hide="$root.authUser" > -->
+         <li ng-hide="$root.authUser" > 
+            <a target="_self" href="api/loginTwitter"><span   class="fa fa-twitter fa-lg"></span>
             </a>
             
         </li>
@@ -52,12 +53,12 @@
         <!-- User auth info -->
         <li id="userAuthInfo" ng-show="$root.authUser">
             <!-- <a>Welcome <img src="{{vm.authUser.user.photoURL}}" /> {{ vm.authData.name}}</a> -->
-            <a>Welcome  {{ $root.authUser.name}}</a>
+            <a><img src="{{$root.authUser.photos[0].value}}" /> Welcome  {{ $root.authUser.displayName}}</a>
         </li>
 
         <!-- Logout button -->
-        <li id="logoutButton" ng-click="vm.logout()" ng-show="$root.authUser">
-            <a><span class="fa fa-sign-out"></span>Logout</a>
+        <li id="logoutButton" ng-show="$root.authUser">
+            <a target="_self" href="api/logout"><span class="fa fa-sign-out"></span>Logout</a>
         </li>
 
       </ul>

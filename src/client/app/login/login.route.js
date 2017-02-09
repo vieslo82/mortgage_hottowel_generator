@@ -26,8 +26,8 @@
             content: '<i class="fa fa-sign-in"></i> Sign in'
           }*/
         }
-      },
-      {
+      }
+     /* {
         state: 'loginTwitter',
         config: {
           url: '/loginTwitter',
@@ -35,12 +35,9 @@
           controller: 'LoginController',
           controllerAs: 'vm',
           title: 'loginTwitter'
-          /*settings: {
-            nav: 5,
-            content: '<i class="fa fa-sign-in"></i> Sign in'
-          }*/
+       
         }
-      }
+      }*/
     ];
   }
 })();

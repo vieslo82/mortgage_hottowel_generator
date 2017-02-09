@@ -37,15 +37,24 @@
     }
 
     function loginTwitter(){
-        $http({
-            url: '/api/loginTwitter',
-            method: 'POST'
+       
+       $http.get('/api/loginTwitter')
+        .then(success)
+        .catch(fail);
+
+      function success(responseUser) {
+        console.log(" USER TWITTER ANGULAR ",responseUser);
+        /*$http.get('/api/auth/twitter/callback')
+        .then(function(user){
+            console.log ("USER CALLBACK",user);
+            $rootScope.authUser = user.user
         })
-        .then(function(responseUser) {
-            console.log(" %j ",responseUser);
-       },
-       function(responseError) { // optional
-       });
+        .catch(function(fail){})*/
+      }
+
+      function fail(e) {
+         console.log("ERROR /api/loginTwitter: %j ",e)
+      }
     }
 
     /*function logout(){
