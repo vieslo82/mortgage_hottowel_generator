@@ -27,7 +27,9 @@ passport.use(new TwitterStrategy({
 passport.use(new FacebookStrategy({
     clientID: '408509946157515',
     clientSecret: 'fbb3f995d1d03972cf56f6a825b395b0',
-    callbackURL: "http://127.0.0.1:3000/api/auth/facebook/callback"
+    callbackURL: "http://127.0.0.1:3000/api/auth/facebook/callback",
+
+  profileFields: ['id', 'displayName', 'name', 'gender','photos']
   },
   function(accessToken, refreshToken, profile, cb) {
     /*User.findOrCreate({ facebookId: profile.id }, function (err, user) {

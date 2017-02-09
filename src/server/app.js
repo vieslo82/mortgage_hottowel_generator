@@ -22,7 +22,7 @@ app.use(session({
   secret: 'keyboard cat',
   resave: true,
   saveUninitialized: true,
-  cookie: { secure: false ,maxAge:120000}
+  cookie: { secure: false}
 }));
 var passport = require('passport');
 app.use(passport.initialize()); // Add passport initialization
