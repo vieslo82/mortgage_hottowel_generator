@@ -67,7 +67,7 @@
         return exception.catcher('XHR Failed for getPeople')(e);
       }
     }
-
+    
     //================================================
     // Check if the user is connected
     //================================================
@@ -137,7 +137,8 @@
            $window.navigator.geolocation.getCurrentPosition(
                function (position) {
                    var markers = [];
-                   for (var i = 0; i < 50; i++) {
+                  
+                   /*for (var i = 0; i < 50; i++) {
                        var ret = {
                            latitude: parseInt(position.coords.latitude)+Math.random(),
                            longitude: parseInt(position.coords.longitude)+Math.random(),
@@ -146,14 +147,32 @@
                        };
 
                        markers.push(ret);
-                    }
-                    var home = {
+                    }*/
+                    getPeople().then(function(peopleArray) {
+                      var i=0;
+                      peopleArray.forEach(function(value){
+                          var ret = {
+                           latitude: parseInt(value.latitude),
+                           longitude: parseInt(value.longitude),
+                           icon:'images/icon_lawyer.png',
+                           info:value.firstName+" "+value.lastName+"<br>Age: "+value.age+"<br>Location:"+value.location,
+                           id: i,
+                           title: 'm' + i
+                         };
+                          
+                         i++;
+                         markers.push(ret); 
+                      });
+                      var home = {
                         id: 51,
                         latitude: position.coords.latitude,
                         longitude:position.coords.longitude
-                    };
+                      };
+                      markers.push(home);
+                    });
+                    
 
-                    markers.push(home);
+                    
                     //markers.push = position;
                    //deferred.resolve(position);
                    deferred.resolve(markers);

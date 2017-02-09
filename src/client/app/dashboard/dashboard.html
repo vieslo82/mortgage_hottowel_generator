@@ -71,6 +71,9 @@
                 <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>
                     <!-- <ui-gmap-marker coords="vm.marker.coords" idKey='vm.marker.id' > -->
                     <ui-gmap-markers models="vm.randomMarkers" coords="'self'" icon="'icon'">
+                       <ui-gmap-windows show="show">
+                          <div ng-non-bindable>{{info}}</div>
+                        </ui-gmap-windows>
                     </ui-gmap-markers>
                 </ui-gmap-marker>
                 </ui-gmap-google-map>
