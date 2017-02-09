@@ -27,9 +27,8 @@
                 <table class="table table-condensed table-striped" >
                  <thead>
                    <tr>
-                     <th>Id</th>
-                     <th>DNI</th>
-                     <th>Nom i cognoms</th>
+                     <th>Id</th>                     
+                     <th>Usuari</th>
                      <th>Capital</th>
                      <th>Tipus d'interés</th>
                      <th>Quota</th>
@@ -38,9 +37,8 @@
                  </thead>
                  <tbody>
                    <tr ng-repeat="hipo in vm.mortgagesList" >
-                     <td><a ui-sref="hipotecaEdit({idHipoteca: hipo.$id})">{{$index+1}}</a></td>
-                     <td>{{hipo.nif}}</td>
-                     <td>{{hipo.nombre}} {{hipo.ape1}} {{hipo.ape2}}</td>
+                     <td><a ui-sref="hipotecaEdit({idHipoteca: hipo.$id})">{{$index+1}}</a></td>                     
+                     <td>{{$root.authUser.displayName}}</td>
                      <td>{{hipo.dadesEconomiques.capital|currency:'€'}}</td>
                      <td>{{hipo.interesAplicat}}</td>
                      <td>{{hipo.quotaMensual}}</td>
