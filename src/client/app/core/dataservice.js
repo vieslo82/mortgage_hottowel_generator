@@ -52,7 +52,15 @@
 
     return service;
 
-    function getMessageCount() { return $q.when(72); }
+    function getMessageCount() {
+       var deferred = $q.defer();
+       getPeople().then(function(peopleArray) {
+         deferred.resolve(peopleArray.length);
+       },function (err) {
+                   deferred.reject(err);
+       });       
+       return deferred.promise;         
+    }
     //DEPRECATED
     function getPeople() {
       return $http.get('/api/people')
@@ -138,16 +146,6 @@
                function (position) {
                    var markers = [];
                   
-                   /*for (var i = 0; i < 50; i++) {
-                       var ret = {
-                           latitude: parseInt(position.coords.latitude)+Math.random(),
-                           longitude: parseInt(position.coords.longitude)+Math.random(),
-                           id: i,
-                           title: 'm' + i
-                       };
-
-                       markers.push(ret);
-                    }*/
                     getPeople().then(function(peopleArray) {
                       var i=0;
                       peopleArray.forEach(function(value){
@@ -169,12 +167,7 @@
                         longitude:position.coords.longitude
                       };
                       markers.push(home);
-                    });
-                    
-
-                    
-                    //markers.push = position;
-                   //deferred.resolve(position);
+                    });                    
                    deferred.resolve(markers);
                },
                function (err) {

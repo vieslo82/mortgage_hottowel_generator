@@ -11,6 +11,7 @@ function getPeople() {
     { id: 5, firstName: 'Ella', lastName: 'Jobs', age: 18, location: 'Madrid',latitude:'40.426343',longitude:'-3.676987' },
     { id: 6, firstName: 'Landon', lastName: 'Gates', age: 11, location: 'Granada',latitude:'37.1899',longitude:'-3.607206' },
     { id: 7, firstName: 'Haley', lastName: 'Guthrie', age: 35, location: 'Salamanca',latitude:'41.013662',longitude:'-5.727997' },
-    { id: 8, firstName: 'Aaron', lastName: 'Jinglehiemer', age: 22, location: 'Bilbao',latitude:'43.260224',longitude:'-2.934508' }
+    { id: 8, firstName: 'Aaron', lastName: 'Jinglehiemer', age: 22, location: 'Bilbao',latitude:'43.260224',longitude:'-2.934508' },
+    { id: 9, firstName: 'Aaron', lastName: 'Jinglehiemer', age: 22, location: 'Bilbao',latitude:'43.260224',longitude:'-2.934508' }
   ];
 }
