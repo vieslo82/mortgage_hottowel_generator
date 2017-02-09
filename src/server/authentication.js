@@ -7,7 +7,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 passport.use(new LocalStrategy(
   function(username, password, done) {
     if (username === 'admin' && password === 'admin'){ // stupid example
-      return done(null, {displayName: 'admin'});
+      return done(null, {id:'343242',displayName: 'admin'});
     }
 
     return done(null, false, { message: 'Incorrect username.' });

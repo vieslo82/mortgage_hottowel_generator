@@ -21,12 +21,6 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
   res.send(req.user);
 });
 
-// route to log in twitter
-/*router.get('/loginTwitter', passport.authenticate('twitter'), function(req, res) {
-  console.log('login EXPRESS ');
-  console.log('session '+JSON.stringify(req.session));
-  res.send(req.user);
-});*/
 
 router.get('/loginTwitter',
   passport.authenticate('twitter'));

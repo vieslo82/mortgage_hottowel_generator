@@ -7,33 +7,35 @@
     .module('app.dashboard')
     .controller('DashboardController', DashboardController);
 
-  DashboardController.$inject = ['$window','$q', 'dataservice', 'logger', '$firebaseArray'];
+  DashboardController.$inject = ['$rootScope','$window','$q', 'dataservice', 'logger', '$firebaseArray'];
   /* @ngInject */
-  function DashboardController($window, $q, dataservice, logger, $firebaseArray) {
+  function DashboardController($rootScope,$window, $q, dataservice, logger, $firebaseArray) {
     var vm = this;
     //Map centered on spain
     vm.map = { center: { latitude: 39.5770969, longitude: -3.5280415 }, zoom: 6 };
-
-    /*uiGmapIsReady.then(function(maps) {
-        vm.map = { center: { latitude: 39.5770969, longitude: -3.5280415 }, zoom: 6 };
-        console.log('Google Maps loaded');
-    });*/
 
     vm.mortgageInfo = {
       title: 'Your Mortgages List simulations',
       description: 'Preparing list'
     };
-    //vm.mortgagesList = [];
-    var ref = firebase.database().ref().child("hipotecas");
-    vm.mortgagesList = $firebaseArray(ref);
+    
+   dataservice.isLoggedin().then(function(data) {
+        $rootScope.authUser = data;
+        if ($rootScope.authUser && $rootScope.authUser.id){
+          var ref = firebase.database().ref().child("hipotecas/"+$rootScope.authUser.id);
+          vm.mortgagesList = $firebaseArray(ref);  
+        }        
+    });
+    
+    //var ref = firebase.database().ref().child("hipotecas");
+    //vm.mortgagesList = $firebaseArray(ref);
     vm.messageCount = 0;
     vm.people = [];
     vm.title = 'Dashboard';
 
     activate();
 
-    function activate() {
-      //var promises = [getMessageCount(), getPeople(),getMortgages()];
+    function activate() {      
       var promises = [getMessageCount(), getPeople(),getGeoPosition()];
       return $q.all(promises).then(function() {
         logger.info('Activated Dashboard View');
@@ -42,13 +44,7 @@
 
     //Passar a factory
     function getGeoPosition(){
-        return dataservice.getCurrentPosition().then(function(data) {
-            /*vm.marker = {
-              id: 0,
-              coords: {
-                latitude: data.coords.latitude,
-                longitude: data.coords.longitude
-            }};*/
+        return dataservice.getCurrentPosition().then(function(data) {           
             vm.randomMarkers = data;
              return vm.randomMarkers;
         });

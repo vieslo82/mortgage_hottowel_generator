@@ -5,13 +5,13 @@
         .module('app.hipoteca')
         .controller('HipotecaController', HipotecaController);
 
-    HipotecaController.$inject = ['$firebaseAuth','$firebaseArray','$q','$stateParams','$scope','$window','dataservice','localStorageService','logger'];
+    HipotecaController.$inject = ['$firebaseArray','$q','$stateParams','$scope','$window','dataservice','localStorageService','logger'];
 
     /* @ngInject */
-    function HipotecaController($firebaseAuth,$firebaseArray,$q,$stateParams,$scope,$window,dataservice,localStorageService,logger) {
+    function HipotecaController($firebaseArray,$q,$stateParams,$scope,$window,dataservice,localStorageService,logger) {
         var vm = this;
 
-        vm.authData = $firebaseAuth().$getAuth();
+        //vm.authData = $firebaseAuth().$getAuth();
         var hipotecaState = 'NEW';
         var hipotecasRef = firebase.database().ref().child('hipotecas');
         vm.hipotecas = $firebaseArray(hipotecasRef);
@@ -53,7 +53,7 @@
         activate();
 
         function activate() {
-            //var promises = [];
+            
 
             if($stateParams.idHipoteca){//UPDATE EXISTING MORTGAGE
                 //promises=[getMortgagesFB($stateParams.idHipoteca)];
@@ -66,8 +66,7 @@
                     console.log("Error:", error);
                 });
             }else{//NEW MORTGAGE USER AUTHENTICATED
-                if (vm.authData) {
-                    //alert(JSON.stringify(vm.authData));
+                if (vm.authData) {               
                     vm.hipoteca.nombre = vm.authData.displayName;
                     vm.hipoteca.email = vm.authData.providerData[0].email;
                 }
@@ -75,12 +74,7 @@
 
 
         }
-
-        /*function getMortgagesFB(idHipoteca) {
-            //vm.hipoteca = dataservice.getMortgagesFB(idHipoteca);
-            vm.hipoteca = dataservice.getMortgagesFB('-Kb2BBoaMo2-pcWKJJBS');
-            return vm.hipoteca;
-        }*/
+        
 
         function calcularHipoteca(){
              var interesAplicat_=parseFloat(vm.hipoteca.dadesEconomiques.euribor)+parseFloat(vm.hipoteca.dadesEconomiques.diferencial);
@@ -116,17 +110,6 @@
                  });
                  return false;
              }else{
-               /*vm.json = angular.toJson(vm.hipoteca);
-               vm.hipotecas = localStorageService.get('hipotecas') || [];
-
-               if (vm.hipoteca.idHipoteca===null || vm.hipoteca.idHipoteca===undefined){ //Si es hipoteca nova
-                 vm.hipoteca.idHipoteca=vm.hipotecas.length;
-                 vm.hipotecas.push(vm.hipoteca);
-               }else{ //Si estem editant una vella
-                 vm.hipotecas[vm.hipoteca.idHipoteca]=vm.hipoteca;
-               }
-               vm.saveMortgage();*/
-               //dataservice.addMortgage(vm.hipoteca);
                if (hipotecaState === "NEW"){
                 vm.hipotecas.$add(vm.hipoteca);
                }else{
