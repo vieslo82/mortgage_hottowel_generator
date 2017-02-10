@@ -5,27 +5,27 @@
     .module('app.core')
     .factory('dataservice', dataservice)
     .config(function($httpProvider) {
-        var config = {
-            apiKey: 'AIzaSyA6b-K_LzG0Lt3OPmwbxlYe1FW67CXbrPY',
-            authDomain: 'mortgage-calculator.firebaseapp.com',
-            databaseURL: 'https://mortgage-calculator.firebaseio.com',
-            storageBucket: 'firebase-mortgage-calculator.appspot.com',
-            messagingSenderId: '978656105531'
+      var config = {
+          apiKey: 'AIzaSyA6b-K_LzG0Lt3OPmwbxlYe1FW67CXbrPY',
+          authDomain: 'mortgage-calculator.firebaseapp.com',
+          databaseURL: 'https://mortgage-calculator.firebaseio.com',
+          storageBucket: 'firebase-mortgage-calculator.appspot.com',
+          messagingSenderId: '978656105531'
         };
-        firebase.initializeApp(config);
+      firebase.initializeApp(config);
 
-        //================================================
-        // Add an interceptor for AJAX errors
-        //================================================
+      //================================================
+      // Add an interceptor for AJAX errors
+      //================================================
 
-        $httpProvider.interceptors.push(function($q,$location) {
-            return {
-               response: function(response) {
+      $httpProvider.interceptors.push(function($q,$location) {
+        return {
+          response: function(response) {
                  // do something on success
                  return response;
                },
-               responseError: function(response) {
-                 if (response.status === 401){
+          responseError: function(response) {
+                 if (response.status === 401) {
                    console.log('TETETETETETET');
                    $location.url('/login');
 
@@ -33,13 +33,15 @@
                  }
                  return $q.reject(response);
                }
-           };
-       });
+        };
+      });
     });
 
-  dataservice.$inject = ['$rootScope','$state','$window','$http', '$q', 'exception', 'logger','localStorageService'];
+  dataservice.$inject = ['$rootScope','$state','$window','$http', '$q',
+                        'exception', 'logger','localStorageService'];
   /* @ngInject */
-  function dataservice($rootScope,$state,$window, $http, $q, exception, logger, localStorageService) {
+  function dataservice($rootScope,$state,$window, $http, $q,
+                      exception, logger, localStorageService) {
 
     var service = {
       getPeople: getPeople,
@@ -53,13 +55,13 @@
     return service;
 
     function getMessageCount() {
-       var deferred = $q.defer();
-       getPeople().then(function(peopleArray) {
+      var deferred = $q.defer();
+      getPeople().then(function(peopleArray) {
          deferred.resolve(peopleArray.length);
        },function (err) {
-                   deferred.reject(err);
-       });       
-       return deferred.promise;         
+         deferred.reject(err);
+       });
+      return deferred.promise;
     }
     //DEPRECATED
     function getPeople() {
@@ -75,22 +77,22 @@
         return exception.catcher('XHR Failed for getPeople')(e);
       }
     }
-    
+
     //================================================
     // Check if the user is connected
     //================================================
-    function checkLoggedin(){
-      
+    function checkLoggedin() {
+
       return $http.get('/api/loggedin')
         .then(success)
         .catch(fail);
 
       function success(responseUser) {
-         if (responseUser.data === '0'){
-             $rootScope.authUser = false;
-             $state.go('login');
-        }else{
-            $rootScope.authUser = responseUser.data;
+        if (responseUser.data === '0') {
+          $rootScope.authUser = false;
+          $state.go('login');
+        }else {
+          $rootScope.authUser = responseUser.data;
         }
       }
 
@@ -99,16 +101,16 @@
       }
     }
 
-    function isLoggedin(){      
+    function isLoggedin() {
       return $http.get('/api/loggedin')
         .then(success)
         .catch(fail);
 
       function success(responseUser) {
-         if (responseUser.data === '0'){
-              $rootScope.authUser = false;
-             return false;
-        }else{
+        if (responseUser.data === '0') {
+          $rootScope.authUser = false;
+          return false;
+        }else {
           $rootScope.authUser = responseUser.data;
           return responseUser.data;
         }
@@ -119,60 +121,58 @@
       }
     }
 
-    function logout(){      
+    function logout() {
       return $http({
-            url: '/api/logout',
-            method: 'POST'
-        })
-        .then(function(responseUser) {            
-            console.log('OKKK:'+responseUser);
-             $rootScope.authUser =false;
-            $state.go('/');
-
-       },
-       function(responseError) { // optional           
-           console.log('ERRRRROR: '+responseError);
-           //$state.go('login');
+        url: '/api/logout',
+        method: 'POST'
+      })
+        .then(function(responseUser) {
+          console.log('OKKK:' + responseUser);
+          $rootScope.authUser = false;
+          $state.go('/');
+        },
+       function(responseError) {
+         // optional
+         console.log('ERRRRROR: ' + responseError);
+         //$state.go('login');
        });
     }
 
-    function getCurrentPosition(){
-        var deferred = $q.defer();
+    function getCurrentPosition() {
+      var deferred = $q.defer();
 
-       if (!$window.navigator.geolocation) {
-           deferred.reject('Geolocation not supported.');
-       } else {
-           $window.navigator.geolocation.getCurrentPosition(
+      if (!$window.navigator.geolocation) {
+        deferred.reject('Geolocation not supported.');
+      }else {
+        $window.navigator.geolocation.getCurrentPosition(
                function (position) {
-                   var markers = [];
-                  
-                    getPeople().then(function(peopleArray) {
-                      
-                      peopleArray.forEach(function(value){
-                          var ret = {
+                 var markers = [];
+                 getPeople().then(function(peopleArray) {
+                   peopleArray.forEach(function(value) {
+                     var ret = {
                            latitude: parseInt(value.latitude),
                            longitude: parseInt(value.longitude),
                            icon:'images/icon_lawyer.png',
-                           info:value.firstName+" "+value.lastName+"<br>Age: "+value.age+"<br>Location:"+value.location,
+                           info:  value.firstName + ' ' + value.lastName +
+                                  '<br>Age: ' + value.age + '<br>Location:' + value.location,
                            id: value.id
-                         };                       
-                      
-                         markers.push(ret); 
-                      });
-                      var home = {
+                         };
+                     markers.push(ret);
+                   });
+                   var home = {
                         id: 51,
                         latitude: position.coords.latitude,
                         longitude:position.coords.longitude
                       };
-                      markers.push(home);
-                    });                    
-                   deferred.resolve(markers);
+                   markers.push(home);
+                 });
+                 deferred.resolve(markers);
                },
                function (err) {
-                   deferred.reject(err);
+                 deferred.reject(err);
                });
-       }
-       return deferred.promise;
+      }
+      return deferred.promise;
     }
   }
 

@@ -43,7 +43,7 @@
         .catch(fail);
 
       function success(responseUser) {
-        console.log(" USER TWITTER ANGULAR ",responseUser);
+        console.log(' USER TWITTER ANGULAR ',responseUser);
         /*$http.get('/api/auth/twitter/callback')
         .then(function(user){
             console.log ("USER CALLBACK",user);
@@ -53,7 +53,7 @@
       }
 
       function fail(e) {
-         console.log("ERROR /api/loginTwitter: %j ",e)
+         console.log('ERROR /api/loginTwitter: %j ',e);
       }
     }
 

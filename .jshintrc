@@ -50,11 +50,12 @@
     "supernew": false,
     "validthis": false,
     "noyield": false,
-
+   
     "browser": true,
     "node": true,
 
     "globals": {
-        "angular": false
+        "angular": false,
+         "firebase": false
     }
 }

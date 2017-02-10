@@ -27,7 +27,7 @@
           },
 
           resolve:{
-              loggedin: dataservice.checkLoggedin
+            loggedin: dataservice.checkLoggedin
           }
         }
       }
