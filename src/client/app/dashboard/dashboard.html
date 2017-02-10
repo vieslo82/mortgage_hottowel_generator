@@ -5,23 +5,33 @@
         <div class="col-md-6">
             
              <div class"col-md-12">  
+                <a ui-sref="hipoteca">
                 <div class="widget blightblue">
                   
                   <div class="widget-content text-center text-info" style="padding:2.5em">
                         <span class="bold" style="color:white;font-size:1.8em;"><i class="fa fa-money fa-lg"> </i> ¿Do you have ground clause? Simulate your mortgage and get your money back!</span>
                   </div>   
 
-                </div>
+                </div></a>
               
-              
+                <a ui-sref="hipoteca">
                   <div class="widget bblue">               
                   <div class="widget-content text-center text-info" style="padding:2.5em">
                         <span class="bold" style="color:white;font-size:1.8em;"><i class="fa fa-money fa-lg"> </i> Recover set up mortgage costs too! There is judisprudence about it </span>
                   </div>   
-                </div>
+                </div></a>
               </div> 
 
-             <div class="col-md-12 widget wgreen">
+              <div ng-hide="$root.authUser" class"col-md-12">  
+                 <a ui-sref="hipoteca">
+                  <div class="widget bgreen">               
+                  <div class="widget-content text-center text-info" style="padding:2.5em">
+                        <span class="bold" style="color:white;font-size:2.5em;"><i class="fa fa-pencil fa-lg"> </i> NEW SIMULATION </span>
+                  </div>   
+                </div></a>
+              </div>
+
+             <div ng-show="$root.authUser" class="col-md-12 widget wgreen">
             <div ht-widget-header title="{{vm.mortgageInfo.title}}" allow-collapse="true"></div>
             <div class="widget-content text-center text-info">
                 <table class="table table-condensed table-striped" >
