@@ -26,10 +26,10 @@
             content: '<i class="fa fa-file"></i>New mortgage'
           },
           resolve:{
-              loggedin: dataservice.checkLoggedin
+            loggedin: dataservice.checkLoggedin
           }
         }
-    },{
+      },{
       state: 'hipotecaEdit',
       config: {
         url: '/hipoteca/edit/:idHipoteca',
@@ -38,7 +38,7 @@
         controllerAs: 'vm',
         title: 'hipoteca edit',
         resolve:{
-              loggedin: dataservice.checkLoggedin
+          loggedin: dataservice.checkLoggedin
         }
       }
     }

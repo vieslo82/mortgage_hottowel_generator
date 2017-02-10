@@ -35,7 +35,7 @@
           controller: 'LoginController',
           controllerAs: 'vm',
           title: 'loginTwitter'
-       
+
         }
       }*/
     ];

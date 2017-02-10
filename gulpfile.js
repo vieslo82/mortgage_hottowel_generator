@@ -209,7 +209,8 @@ gulp.task('build', ['optimize', 'images', 'fonts'], function() {
  * and inject them into the new index.html
  * @return {Stream}
  */
-gulp.task('optimize', ['inject', 'test'], function() {
+//gulp.task('optimize', ['inject', 'test'], function() {
+gulp.task('optimize', ['inject'], function() {
   log('Optimizing the js, css, and html');
 
   var assets = $.useref.assets({ searchPath: './' });
@@ -563,7 +564,7 @@ function startPlatoVisualizer(done) {
  */
 function startTests(singleRun, done) {
   var child;
-  var excludeFiles = [];
+  var excludeFiles = ['bower_components/**/*'];
   var fork = require('child_process').fork;
   var Karma = require('karma').Server;
   var serverSpecs = config.serverIntegrationSpecs;

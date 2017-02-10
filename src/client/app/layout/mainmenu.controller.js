@@ -6,7 +6,8 @@
     .controller('MainMenuController', MainMenuController);
 
   //MainMenuController.$inject = ['$uibModal','$state', 'routerHelper', '$firebaseAuth'];
-  MainMenuController.$inject = ['$rootScope','$q','logger','$uibModal','$state', 'routerHelper','dataservice'];
+  MainMenuController.$inject = ['$rootScope','$q','logger','$uibModal',
+                              '$state', 'routerHelper','dataservice'];
 
   /* @ngInject */
   //function MainMenuController($uibModal,$state, routerHelper,$firebaseAuth) {
@@ -18,7 +19,7 @@
     // Initialize the Firebase auth factory
     //vm.authObj = $firebaseAuth();
     vm.logout = logout;
-     vm.login = login;
+    vm.login = login;
 
     var states = routerHelper.getStates();
     vm.isCurrent = isCurrent;
@@ -28,14 +29,14 @@
 
     activate();
 
-    function activate() { 
-      getNavRoutes(); 
-      
+    function activate() {
+      getNavRoutes();
+
       var promises = [getAuthUser()];
       return $q.all(promises).then(function() {
         logger.info('Activated layout View');
-      }); 
-   }
+      });
+    }
 
     function getNavRoutes() {
       vm.navRoutes = states.filter(function(r) {
@@ -45,20 +46,21 @@
       });
     }
 
-    function getAuthUser(){
+    function getAuthUser() {
       return dataservice.isLoggedin().then(function(data) {
         $rootScope.authUser = data;
         return $rootScope.authUser;
       });
     }
 
-    function logout(){
+    function logout() {
       return dataservice.logout().then(function(data) {
         $rootScope.authUser = undefined;
         return $rootScope.authUser;
       });
     }
-     function login(){
+
+    function login() {
       $state.go('login');
     }
 

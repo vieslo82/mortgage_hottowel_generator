@@ -53,7 +53,7 @@ function HipotecaController($rootScope,$firebaseArray,$q,$stateParams,
 
     dataservice.isLoggedin().then(function(data) {
       $rootScope.authUser = data;
-      if ($rootScope.authUser && $rootScope.authUser.id){
+      if ($rootScope.authUser && $rootScope.authUser.id) {
         var ref = firebase.database().ref().child('hipotecas/' + $rootScope.authUser.id);
         vm.hipotecas = $firebaseArray(ref);
 
@@ -90,59 +90,60 @@ function HipotecaController($rootScope,$firebaseArray,$q,$stateParams,
                         (100 * (1 - Math.pow(1 + ((interesAplicat_ / 12) / 100),
                         (-1) * vm.hipoteca.dadesEconomiques.terminiAnys * 12)));
 
-             vm.hipoteca.quotaMensual=quota.toLocaleString()+' €';
-             vm.hipoteca.totalInteresos =    ((quota*12*vm.hipoteca.dadesEconomiques.terminiAnys)-
-                                            vm.hipoteca.dadesEconomiques.capital).toLocaleString()+' €';
-        }
+    vm.hipoteca.quotaMensual = quota.toLocaleString() + ' €';
+    vm.hipoteca.totalInteresos = ((quota * 12 * vm.hipoteca.dadesEconomiques.terminiAnys) -
+                                  vm.hipoteca.dadesEconomiques.capital).toLocaleString() + ' €';
+  }
 
-        function resetValues(){
-              vm.hipoteca.dadesEconomiques.interesFixe=undefined;
-              vm.hipoteca.dadesEconomiques.euribor=undefined;
-              vm.hipoteca.dadesEconomiques.diferencial=undefined;
-        }
+  function resetValues() {
+    vm.hipoteca.dadesEconomiques.interesFixe = undefined;
+    vm.hipoteca.dadesEconomiques.euribor = undefined;
+    vm.hipoteca.dadesEconomiques.diferencial = undefined;
+  }
 
-        /*function saveMortgage(){
+  /*function saveMortgage(){
             localStorageService.set('hipotecas', vm.hipotecas);
-        }*/
+  }*/
 
-        function submitAndSaveHipoteca(){
-             if(! $scope.mortgageForm.$valid){
-                 angular.forEach($scope.mortgageForm.$error.required, function(field) {
-                   field.$setDirty();
-                 });
-                 return false;
-             }else{
-               if (hipotecaState === 'NEW'){
-                vm.hipotecas.$add(vm.hipoteca);
-               }else{
-                vm.hipotecas.$save(vm.hipoteca);
-               }
-               $window.location.href ='/';
+  function submitAndSaveHipoteca() {
+    if (!$scope.mortgageForm.$valid) {
+      angular.forEach($scope.mortgageForm.$error.required, function(field) {
+        field.$setDirty();
+      });
+      return false;
+    }else {
+      if (hipotecaState === 'NEW') {
+        vm.hipotecas.$add(vm.hipoteca);
+      }else {
+        vm.hipotecas.$save(vm.hipoteca);
+      }
+      $window.location.href = '/';
 
-               return true;
-             }
-         }
-         $scope.$watchCollection(
+      return true;
+    }
+  }
+
+  $scope.$watchCollection(
                    'vm.hipoteca.dadesEconomiques',
                    //function( newValue, oldValue ) {
-                   function(){
-                       if (vm.hipoteca.dadesEconomiques &&
+                   function() {
+                     if (vm.hipoteca.dadesEconomiques &&
                            vm.hipoteca.dadesEconomiques.capital  &&
                            vm.hipoteca.dadesEconomiques.terminiAnys &&
                            ((vm.hipoteca.dadesEconomiques.euribor &&
                                vm.hipoteca.dadesEconomiques.diferencial) ||
-                               vm.hipoteca.dadesEconomiques.interesFixe) ){
-                         vm.calcularHipoteca();
-                       }else{
-                         vm.hipoteca.quotaMensual=undefined;
-                         vm.hipoteca.interesAplicat=undefined;
-                         vm.hipoteca.totalInteresos=undefined;
-                       }
+                               vm.hipoteca.dadesEconomiques.interesFixe)) {
+                       vm.calcularHipoteca();
+                     }else {
+                       vm.hipoteca.quotaMensual = undefined;
+                       vm.hipoteca.interesAplicat = undefined;
+                       vm.hipoteca.totalInteresos = undefined;
+                     }
                    }
          );
-         /*$scope.$watch('vm.hipoteca.dadesEconomiques.capital', function(current, original) {
+  /*$scope.$watch('vm.hipoteca.dadesEconomiques.capital', function(current, original) {
              logger.info('vm.hipoteca.capital was %s', original);
              logger.info('vm.hipoteca.capital is now %s', current);
         });*/
-    }
+}
 })();

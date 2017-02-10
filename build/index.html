@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+  <style>
+    /* This helps the ng-show/ng-hide animations start at the right place. */
+    /* Since Angular has this but needs to load, this gives us the class early. */
+
+    .ng-hide {
+      display: none!important;
+    }
+  </style>
+  <title ng-bind="title">
+    mortgageCalculator
+  </title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+  <base href="/">
+
+  <link rel="stylesheet" href="styles/lib-bdac4ee41d.css">
+
+  <link rel="stylesheet" href="styles/app-93ada2d8b8.css">
+</head>
+
+<body>
+  <div>
+    <div ng-include="'app/layout/shell.html'"></div>
+    <div id="splash-page" ng-show="showSplash">
+      <div class="page-splash">
+        <div class="page-splash-message">
+          Mortgage Calculator
+        </div>
+        <div class="progress progress-striped active page-progress-bar">
+          <div class="bar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src='//maps.googleapis.com/maps/api/js?key=AIzaSyA6b-K_LzG0Lt3OPmwbxlYe1FW67CXbrPY'></script>
+  <script src="js/lib-e58c26b3c5.js"></script>
+
+  <script src="js/app-7c27e6d50f.js"></script>
+
+  
+   <!-- Google Maps API -->
+   <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6b-K_LzG0Lt3OPmwbxlYe1FW67CXbrPY&callback=initMap"
+     async defer></script> -->
+</body>
+
+</html>
