@@ -273,3 +273,15 @@ The `blocks.router` module contains a routing helper module that assists in addi
 ## License
 
 MIT
+
+## Deploy app in azure cloud platform
+Follow instructions https://docs.microsoft.com/en-us/azure/app-service-web/app-service-web-nodejs-get-started
+
+mortgageground.azurewebsites.net
+https://pedcremo@outlook.com@mortgageground.scm.azurewebsites.net/MortgageGround.git
+https://pedcremo@outlook.com@mortgageground.scm.azurewebsites.net:443/MortgageGround.git
+git clone mortgageground.scm.azurewebsites.net/MortgageGround.git
+
+Deploy "git push azure master"
+
+ az appservice web browse --name MortgageGround --resource-group my-nodejs-app-group
