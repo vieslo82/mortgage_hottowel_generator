@@ -275,13 +275,24 @@ The `blocks.router` module contains a routing helper module that assists in addi
 MIT
 
 ## Deploy app in azure cloud platform
-Follow instructions https://docs.microsoft.com/en-us/azure/app-service-web/app-service-web-nodejs-get-started
 
-mortgageground.azurewebsites.net
-https://pedcremo@outlook.com@mortgageground.scm.azurewebsites.net/MortgageGround.git
-https://pedcremo@outlook.com@mortgageground.scm.azurewebsites.net:443/MortgageGround.git
-git clone mortgageground.scm.azurewebsites.net/MortgageGround.git
+Create a virtual machine on azure platform (ubuntu server 16.04)
+Access via ssh . Create <app_name>.git folder on /home/<username>
+Create hooks folder and put post_update
+ Deploy "git push azure master"
 
-Deploy "git push azure master"
 
- az appservice web browse --name MortgageGround --resource-group my-nodejs-app-group
+ https://docs.microsoft.com/en-us/azure/virtual-machines-linux-nodejs-deploy
+ 13.69.9.139/<none>
+ http://mortgage.westeurope.cloudapp.azure.com/
+ pedcremo pass Cal--17$
+
+git remote add azure pedcremo@mortgage.westeurope.cloudapp.azure.com:mortgage.git
+
+Included in hooks (post_update)
+
+#!/bin/bash
+forever stopall
+unset 'GIT_DIR'
+cd ~/mortgage.git && git fetch origin && git pull origin master && npm install && PORT=8001 NODE_ENV=build forever start src/server/app.js
+exec git update-server-info
