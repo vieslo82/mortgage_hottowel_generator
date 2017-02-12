@@ -7,6 +7,25 @@ var gulp = require('gulp');
 var path = require('path');
 var _ = require('lodash');
 var $ = require('gulp-load-plugins')({ lazy: true });
+var GulpSSH = require('gulp-ssh');
+
+var config = {
+  host: '13.69.9.139',
+  port: 22,
+  username: 'pedcremo',
+  password: 'Calendari2017$'
+};
+
+var gulpSSH = new GulpSSH({
+  ignoreErrors: false,
+  sshConfig: config
+});
+
+gulp.task('deploy', function () {
+  return gulpSSH
+    .exec(['mortgage.git/hooks/post-update'], {filePath: 'commands.log'})
+    .pipe(gulp.dest('logs'));
+});
 
 var colors = $.util.colors;
 var envenv = $.util.env;
