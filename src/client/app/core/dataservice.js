@@ -46,7 +46,7 @@
     var service = {
       getPeople: getPeople,
       getMessageCount: getMessageCount,
-      getCurrentPosition: getCurrentPosition,
+      //getCurrentPosition: getCurrentPosition,
       checkLoggedin: checkLoggedin,
       isLoggedin: isLoggedin,
       logout: logout
@@ -138,7 +138,7 @@
        });
     }
 
-    function getCurrentPosition() {
+    /*function getCurrentPosition() {
       var deferred = $q.defer();
 
       if (!$window.navigator.geolocation) {
@@ -146,34 +146,15 @@
       }else {
         $window.navigator.geolocation.getCurrentPosition(
                function (position) {
-                 var markers = [];
-                 getPeople().then(function(peopleArray) {
-                   peopleArray.forEach(function(value) {
-                     var ret = {
-                           latitude: parseInt(value.latitude),
-                           longitude: parseInt(value.longitude),
-                           icon:'images/icon_lawyer.png',
-                           info:  value.firstName + ' ' + value.lastName +
-                                  '<br>Age: ' + value.age + '<br>Location:' + value.location,
-                           id: value.id
-                         };
-                     markers.push(ret);
-                   });
-                   var home = {
-                        id: 51,
-                        latitude: position.coords.latitude,
-                        longitude:position.coords.longitude
-                      };
-                   markers.push(home);
-                 });
-                 deferred.resolve(markers);
+                 
+                 deferred.resolve({lat:position.coords.latitude,
+                                  lng:position.coords.longitude});
                },
                function (err) {
                  deferred.reject(err);
                });
       }
       return deferred.promise;
-    }
+    }*/
   }
-
 })();

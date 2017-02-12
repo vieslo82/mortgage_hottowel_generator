@@ -76,15 +76,31 @@
                </div>
           </div>
           <div class="widget-content text-center text-info">
-                <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>
-                    <!-- <ui-gmap-marker coords="vm.marker.coords" idKey='vm.marker.id' > -->
+                <!-- <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>                    
                     <ui-gmap-markers models="vm.randomMarkers" coords="'self'" icon="'icon'">
                        <ui-gmap-windows show="show">
                           <div ng-non-bindable>{{info}}</div>
                         </ui-gmap-windows>
                     </ui-gmap-markers>
                 </ui-gmap-marker>
-                </ui-gmap-google-map>
+                </ui-gmap-google-map> -->
+                <ng-map  default-style="true" center="[39.57, -3.52]">
+                   <marker position="current" animation="Animation.BOUNCE" centered="true"></marker>
+                  <marker ng-repeat="lawyer in vm.lawyers" id="{{lawyer.id}}" position="{{lawyer.lat}},{{lawyer.lng}}" icon="{
+        url:'images/icon_lawyer.png'}" on-click="vm.showDetailLawyer(lawyer)"></marker>
+
+                  <info-window id="foo-iw">
+                    <div ng-non-bindable="">
+                    id: {{vm.lawyer.id}}<br/>
+                    name: {{vm.lawyer.firstName}} {{vm.lawyer.lastName}}<br/>
+                    Age: {{vm.lawyer.age}}<br/>
+                    Location: {{vm.lawyer.location}}<br/>                    
+                    Position 2: {{anchor.getPosition()}}<br/>
+                    Position 3: {{vm.map.markers[vm.lawyer.id].getPosition()}}<br/>
+                    <a href="#" ng-click="vm.clicked()">Click Here</a>
+                  </div>
+                </info-window> 
+                </ng-map>
             </div>
         </div> 
        

@@ -5,13 +5,31 @@
     .module('app.dashboard')
     .controller('DashboardController', DashboardController);
 
-  DashboardController.$inject = ['$rootScope','$window','$q', 'dataservice',
+  DashboardController.$inject = ['NgMap','$rootScope','$window','$q', 'dataservice',
                                 'logger', '$firebaseArray'];
   /* @ngInject */
-  function DashboardController($rootScope,$window, $q, dataservice, logger, $firebaseArray) {
+  function DashboardController(NgMap, $rootScope,$window, $q, dataservice, logger, $firebaseArray) {
     var vm = this;
     //Map centered on spain
-    vm.map = { center: { latitude: 39.5770969, longitude: -3.5280415 }, zoom: 6 };
+    //vm.map = { center: { latitude: 39.5770969, longitude: -3.5280415 }, zoom: 6 };
+    vm.showDetailLawyer = showDetailLawyer;
+
+    NgMap.getMap().then(function(map) {
+      vm.map = map;
+      vm.map.setZoom(7);
+      dataservice.getPeople().then(function(people) {
+        vm.lawyers = people;
+      });
+    });
+
+    function showDetailLawyer(e, lawyer) {
+      vm.lawyer = lawyer;
+      vm.map.showInfoWindow('foo-iw', lawyer.id);
+    }
+
+    vm.clicked = function() {
+      console.log('Clicked a link inside infoWindow');
+    };
 
     vm.mortgageInfo = {
       title: 'Your Mortgages List simulations',
@@ -35,19 +53,20 @@
     activate();
 
     function activate() {
-      var promises = [getMessageCount(), getPeople(),getGeoPosition()];
+
+      var promises = [getMessageCount(), getPeople()];
       return $q.all(promises).then(function() {
         logger.info('Activated Dashboard View');
       });
     }
 
     //Passar a factory
-    function getGeoPosition() {
+    /*function getGeoPosition() {
       return dataservice.getCurrentPosition().then(function(data) {
         vm.randomMarkers = data;
         return vm.randomMarkers;
       });
-    }
+    }*/
 
     function getMessageCount() {
       return dataservice.getMessageCount().then(function(data) {
