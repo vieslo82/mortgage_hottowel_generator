@@ -294,5 +294,9 @@ Included in hooks (post_update)
 #!/bin/bash
 forever stopall
 unset 'GIT_DIR'
-cd ~/mortgage.git && git fetch origin && git pull origin master && npm install && PORT=8001 NODE_ENV=build forever start src/server/app.js
+cd ~/mortgage.git && git fetch origin && git pull origin master && npm install && sudo PORT=80 NODE_ENV=build forever start src/server/app.js
 exec git update-server-info
+
+Per poder executar forever com a sudo sense q demane pass he editat /etc/sudoers i afegir. Això és pq si intente llançar
+un server express per baix del port 1024 necessite ser root
+user ALL=(ALL:ALL) NOPASSWD:/usr/local/bin/forever
