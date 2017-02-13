@@ -15,8 +15,9 @@ ssh <YOUR_USER>@<YOUR_IP_SERVER> "<PROJECT-FOLDER-NAME>.git/hooks/post-update"
 
 # The post-update script in production server is:
 
-# #!/bin/bash
-# forever stopall
-# unset 'GIT_DIR'
-# cd ~/<PROJECT-FOLDER-NAME>.git && git fetch origin && git pull origin master && npm install && sudo PORT=80 NODE_ENV=build forever start src/server/app.js
-# exec git update-server-info
+#!/bin/bash
+#forever stopall
+#unset 'GIT_DIR'
+#cd ~/<PROJECT-NAME>.git && git fetch origin && git pull origin master && bower install && npm install && gulp build && sudo PORT=80 NODE_ENV=build forever start src/server/app.js
+#exec git update-server-info
+
