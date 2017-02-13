@@ -1,6 +1,8 @@
 /*jshint node:true*/
 'use strict';
 
+var fs = require('fs'),
+var https = require('https'),
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -60,9 +62,13 @@ switch (environment) {
     break;
 }
 
-app.listen(port, function() {
+/*app.listen(port, function() {
   console.log('Express server listening on port ' + port);
   console.log('env = ' + app.get('env') +
     '\n__dirname = ' + __dirname +
     '\nprocess.cwd = ' + process.cwd());
-});
+});*/
+https.createServer({
+      key: fs.readFileSync('key.pem'),
+      cert: fs.readFileSync('cert.pem')
+}, app).listen(443);

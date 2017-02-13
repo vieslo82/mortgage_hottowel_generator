@@ -284,6 +284,7 @@ Create hooks folder and put post_update
 
  https://docs.microsoft.com/en-us/azure/virtual-machines-linux-nodejs-deploy
  13.69.9.139/<none>
+
  http://mortgage.westeurope.cloudapp.azure.com/
  pedcremo pass Cal--17$
 
@@ -300,3 +301,8 @@ exec git update-server-info
 Per poder executar forever com a sudo sense q demane pass he editat /etc/sudoers i afegir. Això és pq si intente llançar
 un server express per baix del port 1024 necessite ser root
 user ALL=(ALL:ALL) NOPASSWD:/usr/local/bin/forever
+
+https://letsencrypt.org/
+sudo apt-get install letsencrypt
+
+letsencrypt certonly --webroot -w /var/www/mortgage -d mortgage.westeurope.cloudapp.azure.com -d mortgage.bocairent.net -w /var/www/thing -d thing.is -d m.thing.is
