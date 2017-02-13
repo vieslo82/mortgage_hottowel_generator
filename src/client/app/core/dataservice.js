@@ -12,7 +12,11 @@
           storageBucket: 'firebase-mortgage-calculator.appspot.com',
           messagingSenderId: '978656105531'
         };
-      firebase.initializeApp(config);
+
+      //if (!firebase.getInstance('FirebaseAPP')) {
+      if (firebase.apps.length === 0) {
+        firebase.initializeApp(config);
+      }
 
       //================================================
       // Add an interceptor for AJAX errors
@@ -146,8 +150,7 @@
       }else {
         $window.navigator.geolocation.getCurrentPosition(
                function (position) {
-                 
-                 deferred.resolve({lat:position.coords.latitude,
+                  deferred.resolve({lat:position.coords.latitude,
                                   lng:position.coords.longitude});
                },
                function (err) {

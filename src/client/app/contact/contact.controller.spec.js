@@ -11,7 +11,7 @@ describe('ContactController', function() {
   beforeEach(function() {
     sinon.stub(dataservice, 'getPeople').returns($q.when(people));
     controller = $controller('ContactController');
-    $rootScope.$apply();
+    //$rootScope.$apply();
   });
 
   bard.verifyNoOutstandingHttpRequests();
