@@ -17,7 +17,7 @@ passport.use(new LocalStrategy(
 passport.use(new TwitterStrategy({
     consumerKey: 'O7irwQHhR39bk5oWuYK7KgBK5',
     consumerSecret: 'brTcGHZI8SQPz1U08HAm5VeSnjatuASLF6EyD1hdpkmlMvk2Me',
-    callbackURL: 'http://127.0.0.1:3000/api/auth/twitter/callback'
+    callbackURL: 'http://127.0.0.1:' + process.env.PORT + '/api/auth/twitter/callback'
   },
   function(token, tokenSecret, profile, cb) {
     return cb(null, profile);
@@ -27,7 +27,7 @@ passport.use(new TwitterStrategy({
 passport.use(new FacebookStrategy({
     clientID: '408509946157515',
     clientSecret: 'fbb3f995d1d03972cf56f6a825b395b0',
-    callbackURL: 'http://127.0.0.1:3000/api/auth/facebook/callback',
+    callbackURL: 'http://127.0.0.1:' + process.env.PORT + '/api/auth/facebook/callback',
     profileFields: ['id', 'displayName', 'name', 'gender','photos']
   },
   function(accessToken, refreshToken, profile, cb) {

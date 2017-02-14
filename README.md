@@ -305,6 +305,7 @@ user ALL=(ALL:ALL) NOPASSWD:/usr/local/bin/forever
 https://letsencrypt.org/
 sudo apt-get install letsencrypt
 
+Executem des de dins de la carpeta build
 letsencrypt certonly --webroot -w /var/www/mortgage -d mortgage.westeurope.cloudapp.azure.com -d mortgage.bocairent.net -w /var/www/thing -d thing.is -d m.thing.is
 
 create your own certificate in project root folder

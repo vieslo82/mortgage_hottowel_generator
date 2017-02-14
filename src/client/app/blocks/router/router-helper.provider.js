@@ -69,7 +69,7 @@
           authservice.checkLoggedin();
         }catch (e) {
           console.log('Injector has NOT authservice service!');
-        }        
+        }
       }
 
       function handleRoutingErrors() {

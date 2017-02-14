@@ -32,16 +32,16 @@
         </li>
               
         
-        <li  ng-hide="$root.authUser" ui-sref="login"><a><i  class="fa fa-sign-in"></i> Sign in</a></li>
+        <li  ng-hide="!vm.isAuthservicePresent || $root.authUser" ui-sref="login"><a><i  class="fa fa-sign-in"></i> Sign in</a></li>
  
 
-        <li ng-hide="$root.authUser" >
+        <li ng-hide="!vm.isAuthservicePresent || $root.authUser" >
             <a target="_self" href="api/loginFacebook"><span  class="fa fa-facebook fa-lg"></span>
             </a>            
         </li> 
 
         <!-- <li ui-sref="loginTwitter" ng-hide="$root.authUser" > -->
-         <li ng-hide="$root.authUser" > 
+         <li ng-hide="!vm.isAuthservicePresent || $root.authUser" > 
             <a target="_self" href="api/loginTwitter"><span   class="fa fa-twitter fa-lg"></span>
             </a>
             

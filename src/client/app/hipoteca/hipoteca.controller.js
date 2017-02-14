@@ -4,12 +4,12 @@ angular
         .module('app.hipoteca')
         .controller('HipotecaController', HipotecaController);
 
-HipotecaController.$inject = ['$rootScope','$firebaseArray','$q','$stateParams',
-                                '$scope','$window','dataservice','localStorageService','logger'];
+HipotecaController.$inject = ['$injector','$rootScope','$firebaseArray','$q','$stateParams',
+                                '$scope','$window','localStorageService','logger'];
 
 /* @ngInject */
-function HipotecaController($rootScope,$firebaseArray,$q,$stateParams,
-                                $scope,$window,dataservice,localStorageService,logger) {
+function HipotecaController($injector,$rootScope,$firebaseArray,$q,$stateParams,
+                                $scope,$window,localStorageService,logger) {
   var vm = this;
 
   //vm.authData = $firebaseAuth().$getAuth();
@@ -50,27 +50,34 @@ function HipotecaController($rootScope,$firebaseArray,$q,$stateParams,
   activate();
 
   function activate() {
+    var authservice;
+    try {
+      authservice = $injector.get('authservice');
+      console.log('Injector has authservice service!');
 
-    dataservice.isLoggedin().then(function(data) {
-      $rootScope.authUser = data;
-      if ($rootScope.authUser && $rootScope.authUser.id) {
-        var ref = firebase.database().ref().child('hipotecas/' + $rootScope.authUser.id);
-        vm.hipotecas = $firebaseArray(ref);
+      authservice.isLoggedin().then(function(data) {
+        $rootScope.authUser = data;
+        if ($rootScope.authUser && $rootScope.authUser.id) {
+          var ref = firebase.database().ref().child('hipotecas/' + $rootScope.authUser.id);
+          vm.hipotecas = $firebaseArray(ref);
 
-        if ($stateParams.idHipoteca) {
-          //UPDATE EXISTING MORTGAGE
-          //promises=[getMortgagesFB($stateParams.idHipoteca)];
-          vm.hipotecas.$loaded()
-                    .then(function(hipotecas) {
-                      vm.hipoteca = hipotecas.$getRecord($stateParams.idHipoteca); // true
-                      hipotecaState = 'UPDATE';
-                    })
-                    .catch(function(error) {
-                      console.log('Error:', error);
-                    });
+          if ($stateParams.idHipoteca) {
+            //UPDATE EXISTING MORTGAGE
+            //promises=[getMortgagesFB($stateParams.idHipoteca)];
+            vm.hipotecas.$loaded()
+                      .then(function(hipotecas) {
+                        vm.hipoteca = hipotecas.$getRecord($stateParams.idHipoteca); // true
+                        hipotecaState = 'UPDATE';
+                      })
+                      .catch(function(error) {
+                        console.log('Error:', error);
+                      });
+          }
         }
-      }
-    });
+      });
+    }catch (e) {
+      console.log('Injector has NOT authservice service!');
+    }
   }
 
   function calcularHipoteca() {

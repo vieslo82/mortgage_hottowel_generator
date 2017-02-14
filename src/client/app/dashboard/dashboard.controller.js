@@ -8,7 +8,8 @@
   DashboardController.$inject = ['$injector','NgMap','$rootScope','$window','$q','dataservice',
                                 'logger', '$firebaseArray'];
   /* @ngInject */
-  function DashboardController($injector,NgMap, $rootScope,$window, $q,dataservice, logger, $firebaseArray) {
+  function DashboardController($injector,NgMap, $rootScope,$window, $q,dataservice,
+                                logger, $firebaseArray) {
     var vm = this;
     //Map centered on spain
     //vm.map = { center: { latitude: 39.5770969, longitude: -3.5280415 }, zoom: 6 };
@@ -39,9 +40,9 @@
     var authservice;
     try {
       authservice = $injector.get('authservice');
-      console.log('Injector has authservice service!')
+      console.log('Injector has authservice service!');
     }catch (e) {
-      console.log('Injector has NOT authservice service!')
+      console.log('Injector has NOT authservice service!');
     }
 
     if (authservice) {
