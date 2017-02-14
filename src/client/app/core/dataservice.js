@@ -22,7 +22,7 @@
       // Add an interceptor for AJAX errors
       //================================================
 
-      $httpProvider.interceptors.push(function($q,$location) {
+      /*$httpProvider.interceptors.push(function($q,$location) {
         return {
           response: function(response) {
                  // do something on success
@@ -38,7 +38,7 @@
                  return $q.reject(response);
                }
         };
-      });
+      });*/
     });
 
   dataservice.$inject = ['$rootScope','$state','$window','$http', '$q',
@@ -49,11 +49,11 @@
 
     var service = {
       getPeople: getPeople,
-      getMessageCount: getMessageCount,
+      getMessageCount: getMessageCount
       //getCurrentPosition: getCurrentPosition,
-      checkLoggedin: checkLoggedin,
-      isLoggedin: isLoggedin,
-      logout: logout
+      //checkLoggedin: checkLoggedin,
+      //isLoggedin: isLoggedin,
+      //logout: logout
     };
 
     return service;
@@ -85,62 +85,62 @@
     //================================================
     // Check if the user is connected
     //================================================
-    function checkLoggedin() {
+    // function checkLoggedin() {
 
-      return $http.get('/api/loggedin')
-        .then(success)
-        .catch(fail);
+    //   return $http.get('/api/loggedin')
+    //     .then(success)
+    //     .catch(fail);
 
-      function success(responseUser) {
-        if (responseUser.data === '0') {
-          $rootScope.authUser = false;
-          $state.go('login');
-        }else {
-          $rootScope.authUser = responseUser.data;
-        }
-      }
+    //   function success(responseUser) {
+    //     if (responseUser.data === '0') {
+    //       $rootScope.authUser = false;
+    //       $state.go('login');
+    //     }else {
+    //       $rootScope.authUser = responseUser.data;
+    //     }
+    //   }
 
-      function fail(e) {
-        return exception.catcher('XHR Failed for /api/loggedin')(e);
-      }
-    }
+    //   function fail(e) {
+    //     return exception.catcher('XHR Failed for /api/loggedin')(e);
+    //   }
+    // }
 
-    function isLoggedin() {
-      return $http.get('/api/loggedin')
-        .then(success)
-        .catch(fail);
+    // function isLoggedin() {
+    //   return $http.get('/api/loggedin')
+    //     .then(success)
+    //     .catch(fail);
 
-      function success(responseUser) {
-        if (responseUser.data === '0') {
-          $rootScope.authUser = false;
-          return false;
-        }else {
-          $rootScope.authUser = responseUser.data;
-          return responseUser.data;
-        }
-      }
+    //   function success(responseUser) {
+    //     if (responseUser.data === '0') {
+    //       $rootScope.authUser = false;
+    //       return false;
+    //     }else {
+    //       $rootScope.authUser = responseUser.data;
+    //       return responseUser.data;
+    //     }
+    //   }
 
-      function fail(e) {
-        return exception.catcher('XHR Failed for /api/loggedin')(e);
-      }
-    }
+    //   function fail(e) {
+    //     return exception.catcher('XHR Failed for /api/loggedin')(e);
+    //   }
+    // }
 
-    function logout() {
-      return $http({
-        url: '/api/logout',
-        method: 'POST'
-      })
-        .then(function(responseUser) {
-          console.log('OKKK:' + responseUser);
-          $rootScope.authUser = false;
-          $state.go('/');
-        },
-       function(responseError) {
-         // optional
-         console.log('ERRRRROR: ' + responseError);
-         //$state.go('login');
-       });
-    }
+    // function logout() {
+    //   return $http({
+    //     url: '/api/logout',
+    //     method: 'POST'
+    //   })
+    //     .then(function(responseUser) {
+    //       console.log('OKKK:' + responseUser);
+    //       $rootScope.authUser = false;
+    //       $state.go('/');
+    //     },
+    //    function(responseError) {
+    //      // optional
+    //      console.log('ERRRRROR: ' + responseError);
+    //      //$state.go('login');
+    //    });
+    // }
 
     /*function getCurrentPosition() {
       var deferred = $q.defer();

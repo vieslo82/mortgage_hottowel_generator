@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.layout')
+    .module('app.authentication')
     .controller('LoginController', LoginController);
 
   LoginController.$inject = ['$rootScope','$http','$state','$location'];
@@ -23,7 +23,7 @@
           vm.message = 'Authentication successful!';
           console.log('OKKK:' + responseUser);
 
-          $rootScope.authUser = responseUser.user;
+          $rootScope.authUser = responseUser.data;
           $state.go('admin');
           //$location.url('/admin   ');
         },

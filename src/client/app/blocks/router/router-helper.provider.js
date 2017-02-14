@@ -26,9 +26,9 @@
     };
 
     this.$get = RouterHelper;
-    RouterHelper.$inject = ['$location', '$rootScope', '$state', 'logger'];
+    RouterHelper.$inject = ['$injector','$location', '$rootScope', '$state', 'logger'];
     /* @ngInject */
-    function RouterHelper($location, $rootScope, $state, logger) {
+    function RouterHelper($injector,$location, $rootScope, $state, logger) {
       var handlingStateChangeError = false;
       var hasOtherwise = false;
       var stateCounts = {
@@ -39,7 +39,8 @@
       var service = {
         configureStates: configureStates,
         getStates: getStates,
-        stateCounts: stateCounts
+        stateCounts: stateCounts,
+        checkLoggedin: checkLoggedin
       };
 
       init();
@@ -58,6 +59,17 @@
           hasOtherwise = true;
           $urlRouterProvider.otherwise(otherwisePath);
         }
+      }
+
+      function checkLoggedin() {
+        var authservice;
+        try {
+          authservice = $injector.get('authservice');
+          console.log('Injector has authservice service!');
+          authservice.checkLoggedin();
+        }catch (e) {
+          console.log('Injector has NOT authservice service!');
+        }        
       }
 
       function handleRoutingErrors() {

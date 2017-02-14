@@ -31,7 +31,8 @@
             <a ui-sref="{{r.name}}" ng-bind-html="r.settings.content"></a>
         </li>
               
-         <li ng-hide="$root.authUser" ui-sref="login"><a><i  class="fa fa-sign-in"></i> Sign in</a></li>
+        
+        <li  ng-hide="$root.authUser" ui-sref="login"><a><i  class="fa fa-sign-in"></i> Sign in</a></li>
  
 
         <li ng-hide="$root.authUser" >
@@ -51,8 +52,7 @@
             </a>
         </li> -->
         <!-- User auth info -->
-        <li id="userAuthInfo" ng-show="$root.authUser">
-            <!-- <a>Welcome <img src="{{vm.authUser.user.photoURL}}" /> {{ vm.authData.name}}</a> -->
+        <li id="userAuthInfo" ng-show="$root.authUser">            
             <a><img src="{{$root.authUser.photos[0].value}}" /> Welcome  {{ $root.authUser.displayName}}</a>
         </li>
 
@@ -60,7 +60,7 @@
         <li id="logoutButton" ng-show="$root.authUser">
             <a target="_self" href="api/logout"><span class="fa fa-sign-out"></span>Logout</a>
         </li>
-
+        </section>
       </ul>
     </div>
   </div>

@@ -5,13 +5,13 @@
     .module('app.hipoteca')
     .run(appRun);
 
-  appRun.$inject = ['routerHelper','dataservice'];
+  appRun.$inject = ['routerHelper'];
   /* @ngInject */
-  function appRun(routerHelper,dataservice) {
-    routerHelper.configureStates(getStates(dataservice));
+  function appRun(routerHelper) {
+    routerHelper.configureStates(getStates(routerHelper));
   }
 
-  function getStates(dataservice) {
+  function getStates(routerHelper) {
     return [
       {
         state: 'hipoteca',
@@ -26,7 +26,7 @@
             content: '<i class="fa fa-file"></i>New mortgage'
           },
           resolve:{
-            loggedin: dataservice.checkLoggedin
+            loggedin: routerHelper.checkLoggedin
           }
         }
       },{
@@ -38,7 +38,7 @@
         controllerAs: 'vm',
         title: 'hipoteca edit',
         resolve:{
-          loggedin: dataservice.checkLoggedin
+          loggedin: routerHelper.checkLoggedin
         }
       }
     }

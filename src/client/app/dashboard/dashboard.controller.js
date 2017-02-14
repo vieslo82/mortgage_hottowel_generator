@@ -5,10 +5,10 @@
     .module('app.dashboard')
     .controller('DashboardController', DashboardController);
 
-  DashboardController.$inject = ['NgMap','$rootScope','$window','$q', 'dataservice',
+  DashboardController.$inject = ['$injector','NgMap','$rootScope','$window','$q','dataservice',
                                 'logger', '$firebaseArray'];
   /* @ngInject */
-  function DashboardController(NgMap, $rootScope,$window, $q, dataservice, logger, $firebaseArray) {
+  function DashboardController($injector,NgMap, $rootScope,$window, $q,dataservice, logger, $firebaseArray) {
     var vm = this;
     //Map centered on spain
     //vm.map = { center: { latitude: 39.5770969, longitude: -3.5280415 }, zoom: 6 };
@@ -36,14 +36,23 @@
       description: 'Preparing list'
     };
 
-    dataservice.isLoggedin().then(function(data) {
-      $rootScope.authUser = data;
-      if ($rootScope.authUser && $rootScope.authUser.id) {
-        var ref = firebase.database().ref().child('hipotecas/' + $rootScope.authUser.id);
-        vm.mortgagesList = $firebaseArray(ref);
-      }
+    var authservice;
+    try {
+      authservice = $injector.get('authservice');
+      console.log('Injector has authservice service!')
+    }catch (e) {
+      console.log('Injector has NOT authservice service!')
+    }
 
-    });
+    if (authservice) {
+      authservice.isLoggedin().then(function(data) {
+        $rootScope.authUser = data;
+        if ($rootScope.authUser && $rootScope.authUser.id) {
+          var ref = firebase.database().ref().child('hipotecas/' + $rootScope.authUser.id);
+          vm.mortgagesList = $firebaseArray(ref);
+        }
+      });
+    }
     //var ref = firebase.database().ref().child("hipotecas");
     //vm.mortgagesList = $firebaseArray(ref);
     vm.messageCount = 0;

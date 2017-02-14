@@ -6,26 +6,17 @@
     .controller('MainMenuController', MainMenuController);
 
   //MainMenuController.$inject = ['$uibModal','$state', 'routerHelper', '$firebaseAuth'];
-  MainMenuController.$inject = ['$rootScope','$q','logger','$uibModal',
+  MainMenuController.$inject = ['$injector','$rootScope','$q','logger','$uibModal',
                               '$state', 'routerHelper','dataservice'];
 
   /* @ngInject */
   //function MainMenuController($uibModal,$state, routerHelper,$firebaseAuth) {
-  function MainMenuController($rootScope,$q, logger, $uibModal,$state, routerHelper,dataservice) {
+  function MainMenuController($injector,$rootScope,$q, logger, $uibModal,
+                              $state, routerHelper,dataservice) {
     var vm = this;
-    //vm.authObj = $firebaseAuth(firebase.database());
-    // Get a reference to the root of the Firebase
-    //vm.rootRef = new Firebase('https://mortgage-calculator.firebaseio.com');
-    // Initialize the Firebase auth factory
-    //vm.authObj = $firebaseAuth();
-    vm.logout = logout;
-    vm.login = login;
 
     var states = routerHelper.getStates();
     vm.isCurrent = isCurrent;
-    //vm.singin = singin;
-    //vm.logOut = logOut;
-    //vm.openLoginModal = openLoginModal;
 
     activate();
 
@@ -47,14 +38,28 @@
     }
 
     function getAuthUser() {
-      return dataservice.isLoggedin().then(function(data) {
-        $rootScope.authUser = data;
-        return $rootScope.authUser;
-      });
+
+      var authservice;
+      try {
+        authservice = $injector.get('authservice');
+        console.log('Injector has authservice service!')
+        vm.isAuthservicePresent = true;
+      }catch (e) {
+        vm.isAuthservicePresent = false;
+        console.log('Injector has NOT authservice service!')
+      }
+      if (authservice) {
+        return authservice.isLoggedin().then(function(data) {
+          $rootScope.authUser = data;
+          return $rootScope.authUser;
+        });
+      }else {
+        return undefined;
+      }
     }
 
-    function logout() {
-      return dataservice.logout().then(function(data) {
+    /*function logout() {
+      return authservice.logout().then(function(data) {
         $rootScope.authUser = undefined;
         return $rootScope.authUser;
       });
@@ -62,7 +67,7 @@
 
     function login() {
       $state.go('login');
-    }
+    }*/
 
     /*function openLoginModal(){
         var modalInstance = $uibModal.open({

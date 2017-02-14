@@ -5,13 +5,13 @@
     .module('app.admin')
     .run(appRun);
 
-  appRun.$inject = ['routerHelper','dataservice'];
+  appRun.$inject = ['routerHelper'];
   /* @ngInject */
-  function appRun(routerHelper,dataservice) {
-    routerHelper.configureStates(getStates(dataservice));
+  function appRun(routerHelper) {
+    routerHelper.configureStates(getStates(routerHelper));
   }
 
-  function getStates(dataservice) {
+  function getStates(routerHelper) {
     return [
       {
         state: 'admin',
@@ -27,7 +27,8 @@
           },
 
           resolve:{
-            loggedin: dataservice.checkLoggedin
+            //loggedin: authservice.checkLoggedin
+            loggedin: routerHelper.checkLoggedin
           }
         }
       }
