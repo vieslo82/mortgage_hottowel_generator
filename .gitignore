@@ -3,6 +3,8 @@
 node_modules/
 bower_components/
 build/
+report/
+
 deploy.sh
 # other
 .tmp

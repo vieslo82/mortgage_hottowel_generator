@@ -306,3 +306,6 @@ https://letsencrypt.org/
 sudo apt-get install letsencrypt
 
 letsencrypt certonly --webroot -w /var/www/mortgage -d mortgage.westeurope.cloudapp.azure.com -d mortgage.bocairent.net -w /var/www/thing -d thing.is -d m.thing.is
+
+create your own certificate in project root folder
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout server.key -out server.crt

@@ -1,8 +1,8 @@
 /*jshint node:true*/
 'use strict';
 
-var fs = require('fs'),
-var https = require('https'),
+var fs = require('fs');
+var https = require('https');
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -47,6 +47,12 @@ switch (environment) {
     });
     // Any deep link calls should return index.html
     app.use('/*', express.static('./build/index.html'));
+    console.log('WARNING: OPEN BROWSER WITH HTTPS');
+    https.createServer({
+      key: fs.readFileSync('server.key'),
+      cert: fs.readFileSync('server.crt')
+    }, app).listen(port);
+
     break;
   default:
     console.log('** DEV **');
@@ -59,6 +65,12 @@ switch (environment) {
     });
     // Any deep link calls should return index.html
     app.use('/*', express.static('./src/client/index.html'));
+    app.listen(port, function() {
+      console.log('Express server listening on port ' + port);
+      console.log('env = ' + app.get('env') +
+      '\n__dirname = ' + __dirname +
+      '\nprocess.cwd = ' + process.cwd());
+    });
     break;
 }
 
@@ -68,7 +80,3 @@ switch (environment) {
     '\n__dirname = ' + __dirname +
     '\nprocess.cwd = ' + process.cwd());
 });*/
-https.createServer({
-      key: fs.readFileSync('key.pem'),
-      cert: fs.readFileSync('cert.pem')
-}, app).listen(443);
