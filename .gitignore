@@ -8,3 +8,4 @@ report/
 deploy.sh
 # other
 .tmp
+.vscode
