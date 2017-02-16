@@ -6,7 +6,10 @@
       "SIGN_IN": "Entrar",
       "DASHBOARD": "<i class='fa fa-dashboard'></i>Inici",
       "CONTACT": "<i class='fa fa-envelope-o'></i>Contacte",
-      "PROFILE": "Perfil",
-      "NEW_MORTGAGE": "<i class='fa fa-file'></i>Nova hipoteca"
+      "PROFILE": "<i class='fa fa-lock'> </i>Perfil",
+      "NEW_MORTGAGE": "<i class='fa fa-file'></i>Nova hipoteca",
+      "USER": "Usuari",
+      "WELCOME": "Benvingut",
+      "LOGOUT": "Eixir"
 
 }

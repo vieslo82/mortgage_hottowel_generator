@@ -13,5 +13,11 @@
         $log.error('The "' + part + '/' + lang + '" part was not loaded. ' + response);
         return $q.when({});
       };
+    })
+    .run(function ($rootScope, $translate) {
+    $rootScope.$on('$translatePartialLoaderStructureChanged', function () {
+      console.log('TRANSLATE REFRESH');
+      $translate.refresh();
     });
+  });
 })();

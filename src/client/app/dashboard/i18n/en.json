@@ -1,4 +1,11 @@
 {
      "DASHBOARD": "Home",
-     "GROUND": "Do you have ground clause? Simulate your mortgage and get your money back!"
+     "GROUND": " Do you have ground clause? Simulate your mortgage and get your money back!",
+     "RECOVER_SET_UP": " Recover set up mortgage costs too! There is judisprudence about it",
+     "NEW_SIMULATION": " NEW SIMULATION",
+     "LAWYERS_AROUND": " Mortgage Lawyers close to you. Get your money back faster",
+     "YOUR_SIMULATIONS": "Your Mortgages List simulations",
+     "INTEREST_RATE": "Interest rate",
+      "QUOTE": "Fee",
+      "DELETE": "Delete"
 }

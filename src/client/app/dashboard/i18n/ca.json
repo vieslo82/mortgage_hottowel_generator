@@ -1,4 +1,11 @@
 {
       "DASHBOARD": "Inici",
-      "GROUND": "Tens clausula sól? Simula la teua hipoteca i recupera els teus diners!"
+      "GROUND": " Tens clausula sòl? Simula la teua hipoteca i recupera els teus diners!",
+      "RECOVER_SET_UP": " Recupera part de les despeses de constitució de la hipoteca! Hi ha jurisprudència al respecte",
+      "NEW_SIMULATION": " NOVA SIMULACIÓ",
+      "LAWYERS_AROUND": " Advocats hipotecaris a prop teu. Recupera els teus diners",
+      "YOUR_SIMULATIONS": "Les teues simulacions hipotecaries",
+      "INTEREST_RATE": "Tipus d'interés",
+      "QUOTE": "Quota",
+      "DELETE": "Esborrar"
 }

@@ -11,34 +11,7 @@
   </div>
   <div class="navbar-collapse collapse" uib-collapse="isCollapsed">
     <div class="pull-right navbar-logo" ng-controller="MainMenuController as vm">
-      <div class="dropdown nav navbar-nav pull-left">
-          <button id="dLabel" type="button" data-toggle="dropdown" translate="LANGUAGE">
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu">
-            <li> <a ng-click="vm.setLang('en')" translate="ENGLISH">English</a></li>
-            <li> <a ng-click="vm.setLang('ca')" translate="CATALA">Catala</a></li>
-          </ul> 
-      </div>
       <ul class="nav navbar-nav pull-right" >
-
-        <!-- <li ng-controller="SidebarController as vm"  ng-class="vm.isCurrent(r)" ng-repeat="r in vm.navRoutes">
-            <a ui-sref="dashboard" ng-bind-html="r.settings.content"></a>
-        </li> -->
-        <!-- <li>
-          <a ng-href="{{vm.navline.link}}" target="_blank">
-                        {{vm.navline.text}}
-                    </a>
-        </li> -->
-        <!-- <li class="dropdown dropdown-big">
-          <a href="http://www.angularjs.org" target="_blank">
-            <img src="images/AngularJS-small.png" />
-          </a>
-      </li> -->
-      
-      
-        <li>
-        </li>
         <li ng-repeat="r in vm.navRoutes">
             <!-- <a ui-sref="{{r.name}}" ng-bind-html="r.settings.content"></a> -->
             <a ui-sref="{{r.name}}" translate="{{r.title}}"></a>
@@ -66,15 +39,28 @@
         </li> -->
         <!-- User auth info -->
         <li id="userAuthInfo" ng-show="$root.authUser">            
-            <a><img src="{{$root.authUser.photos[0].value}}" /> Welcome  {{ $root.authUser.displayName}}</a>
+            <a><img src="{{$root.authUser.photos[0].value}}" /> {{'WELCOME' | translate}}  {{ $root.authUser.displayName}}</a>
         </li>
 
         <!-- Logout button -->
         <li id="logoutButton" ng-show="$root.authUser">
-            <a target="_self" href="api/logout"><span class="fa fa-sign-out"></span>Logout</a>
+            <a target="_self" href="api/logout"><span class="fa fa-sign-out"></span>{{'LOGOUT' | translate}}</a>
         </li>
-        </section>
+        <li>
+          <div class="dropdown nav navbar-nav pull-left">
+          <button id="dLabel" type="button" data-toggle="dropdown" translate="LANGUAGE">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li> <a ng-click="vm.setLang('en')" translate="ENGLISH">English</a></li>
+            <li> <a ng-click="vm.setLang('ca')" translate="CATALA">Catala</a></li>
+          </ul> 
+      </div>
+        </li>
       </ul>
+      
     </div>
+    
+      
   </div>
 </nav>
