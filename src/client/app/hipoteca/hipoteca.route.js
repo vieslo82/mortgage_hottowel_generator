@@ -20,7 +20,7 @@
           templateUrl: 'app/hipoteca/hipoteca.html',
           controller: 'HipotecaController',
           controllerAs: 'vm',
-          title: 'hipoteca',
+          title: 'NEW_MORTGAGE',
           settings: {
             nav: 2,
             content: '<i class="fa fa-file"></i>New mortgage'

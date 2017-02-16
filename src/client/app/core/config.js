@@ -30,7 +30,8 @@
 
     $translateProvider.registerAvailableLanguageKeys(['ca','en'],{
       'ca-ES': 'ca',
-      'en-US': 'en'
+      'en-US': 'en',
+      'en-UK': 'en'
     });
     /*$translateProvider.useStaticFilesLoader({
       prefix: '/app/core/i18n/',

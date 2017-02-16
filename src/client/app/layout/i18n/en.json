@@ -3,5 +3,9 @@
       "ENGLISH": "EN",
       "CATALA": "CAT",
       "LANGUAGE": "LANGUAGE",
-      "SIGN_IN": "Sign in"
+      "SIGN_IN": "Sign in",
+      "DASHBOARD": "<i class='fa fa-dashboard'></i>Home",
+      "CONTACT": "<i class='fa fa-envelope-o'></i>Contact",
+      "PROFILE": "Profile",
+      "NEW_MORTGAGE": "<i class='fa fa-file'></i>New Mortgage"
 }

@@ -20,7 +20,7 @@
           templateUrl: 'app/contact/contact.html',
           controller: 'ContactController',
           controllerAs: 'vm',
-          title: 'contact',
+          title: 'CONTACT',
           settings: {
             nav: 4,
             content: '<i class="fa fa-envelope-o"></i> Contact'

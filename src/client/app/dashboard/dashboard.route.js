@@ -20,7 +20,7 @@
           templateUrl: 'app/dashboard/dashboard.html',
           controller: 'DashboardController',
           controllerAs: 'vm',
-          title: 'dashboard',
+          title: 'DASHBOARD',
           settings: {
             nav: 1,
             content: '<i class="fa fa-dashboard"></i> Home'
