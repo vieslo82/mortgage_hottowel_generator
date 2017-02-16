@@ -5,6 +5,7 @@
     .module('app.core', [
       'ngAnimate', 'ngSanitize',
       'blocks.exception', 'blocks.logger', 'blocks.router',
-      'ui.router', 'ngplus','LocalStorageModule','firebase'
+      'ui.router', 'ngplus','LocalStorageModule','firebase',
+      'pascalprecht.translate'
     ]);
 })();

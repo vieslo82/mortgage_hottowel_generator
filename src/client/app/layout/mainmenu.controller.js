@@ -7,14 +7,14 @@
 
   //MainMenuController.$inject = ['$uibModal','$state', 'routerHelper', '$firebaseAuth'];
   MainMenuController.$inject = ['$injector','$rootScope','$q','logger','$uibModal',
-                              '$state', 'routerHelper','dataservice'];
+                               '$translatePartialLoader','$state', 'routerHelper','dataservice'];
 
   /* @ngInject */
   //function MainMenuController($uibModal,$state, routerHelper,$firebaseAuth) {
   function MainMenuController($injector,$rootScope,$q, logger, $uibModal,
-                              $state, routerHelper,dataservice) {
+                               $translatePartialLoader,$state, routerHelper,dataservice) {
     var vm = this;
-
+    $translatePartialLoader.addPart('layout');
     var states = routerHelper.getStates();
     vm.isCurrent = isCurrent;
 

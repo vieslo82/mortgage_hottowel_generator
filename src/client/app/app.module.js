@@ -10,6 +10,10 @@
     'app.contact',
     'app.hipoteca',
     'app.layout'
-  ]);
-
+  ])
+  .run(function ($rootScope, $translate) {
+    $rootScope.$on('$translatePartialLoaderStructureChanged', function () {
+      $translate.refresh();
+    });
+  });
 })();

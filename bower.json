@@ -14,13 +14,13 @@
   "devDependencies": {
     "angular-mocks": "^1.5.3",
     "sinon": "http://sinonjs.org/releases/sinon-1.12.1.js",
-    "bardjs": "^0.1.8"
+    "bardjs": "^0.1.8"   
   },
   "dependencies": {
     "jquery": "^2.2.2",
     "angular": "~1.5.3",
     "angular-sanitize": "~1.5.3",
-    "angular-local-storage": "~0.5.2",   
+    "angular-local-storage": "~0.5.2",
     "ngmap": "~1.17.0",
     "firebase": "~3.6.6",
     "angularfire": "~2.2.0",
@@ -32,7 +32,10 @@
     "angular-ui-router": "^0.4.2",
     "toastr": "^2.1.2",
     "angular-animate": "^1.5.3",
-    "angular-bootstrap": "^1.2.5"
+    "angular-bootstrap": "^1.2.5",
+    "angular-translate": "^2.14.0",
+    "angular-translate-loader-partial": "^2.14.0",
+    "angular-translate-loader-static-files": "^2.14.0"
   },
   "resolutions": {
     "angular": "1.5.3",
@@ -45,6 +48,8 @@
         "dist/js/bootstrap.js"
       ]
     },
-    "font-awesome": { "main": "css/font-awesome.css" }
+    "font-awesome": {
+      "main": "css/font-awesome.css"
+    }
   }
 }
