@@ -1,6 +1,4 @@
 {
-      TITLE: 'Mortgage Calculator',
-      FOO: 'This is a paragraph.',
-      BUTTON_LANG_EN: 'english',
-      BUTTON_LANG_DE: 'german'
-});
+      "TITLE": "Mortgage Calculator"
+  
+}

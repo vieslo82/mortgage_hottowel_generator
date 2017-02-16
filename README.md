@@ -293,7 +293,7 @@ git remote add azure pedcremo@mortgage.westeurope.cloudapp.azure.com:mortgage.gi
 Included in hooks (post_update)
 
 #!/bin/bash
-forever stopall
+sudo forever stopall
 unset 'GIT_DIR'
 cd ~/mortgage.git && git fetch origin && git pull origin master && npm install && sudo PORT=80 NODE_ENV=build forever start src/server/app.js
 exec git update-server-info
@@ -307,6 +307,8 @@ sudo apt-get install letsencrypt
 
 Executem des de dins de la carpeta build
 letsencrypt certonly --webroot -w /var/www/mortgage -d mortgage.westeurope.cloudapp.azure.com -d mortgage.bocairent.net -w /var/www/thing -d thing.is -d m.thing.is
+
+letsencrypt certonly --webroot -w . -d mortgage.bocairent.net 
 
 create your own certificate in project root folder
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout server.key -out server.crt

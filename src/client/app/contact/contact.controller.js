@@ -7,10 +7,11 @@
     .module('app.contact')
     .controller('ContactController', ContactController);
 
-  ContactController.$inject = ['$q', 'dataservice', 'logger'];
+  ContactController.$inject = ['$translatePartialLoader','$q', 'dataservice', 'logger'];
   /* @ngInject */
-  function ContactController($q, dataservice, logger) {
+  function ContactController($translatePartialLoader,$q, dataservice, logger) {
     var vm = this;
+    $translatePartialLoader.addPart('contact');
     vm.news = {
       title: 'Mortgage Calculator',
       description: 'Hot Towel Angular is a SPA template for Angular developers.'

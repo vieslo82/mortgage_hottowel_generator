@@ -1,7 +1,7 @@
 <nav class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-header">
     <!-- <a href="/" class="navbar-brand"><i class="fa fa-table fa-2x"></i><span class="brand-title">&nbsp;{{vm.navline.title}}</span></a> -->
-    <a href="/" class="navbar-brand" style="font-size:2em;color:white"><i class="fa fa-home fa-lg"></i> {{'TITLE' | translate}}</a>
+    <a href="/" class="navbar-brand" style="font-size:2em;color:white" ><i class="fa fa-home fa-lg"></i>{{'TITLE' | translate}}</a>
     
     <a class="btn navbar-btn navbar-toggle" ng-click="isCollapsed = !isCollapsed">
       <span class="icon-bar"></span>
@@ -10,8 +10,17 @@
     </a>
   </div>
   <div class="navbar-collapse collapse" uib-collapse="isCollapsed">
-    <div class="pull-right navbar-logo">
-      <ul class="nav navbar-nav pull-right" ng-controller="MainMenuController as vm">
+    <div class="pull-right navbar-logo" ng-controller="MainMenuController as vm">
+      <div class="dropdown nav navbar-nav pull-left">
+          <button id="dLabel" type="button" data-toggle="dropdown" translate="LANGUAGE">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li> <a ng-click="vm.setLang('en')" translate="ENGLISH">English</a></li>
+            <li> <a ng-click="vm.setLang('ca')" translate="CATALA">Catala</a></li>
+          </ul> 
+      </div>
+      <ul class="nav navbar-nav pull-right" >
 
         <!-- <li ng-controller="SidebarController as vm"  ng-class="vm.isCurrent(r)" ng-repeat="r in vm.navRoutes">
             <a ui-sref="dashboard" ng-bind-html="r.settings.content"></a>
@@ -26,13 +35,17 @@
             <img src="images/AngularJS-small.png" />
           </a>
       </li> -->
-
+      
+      
+        <li>
+        </li>
         <li ng-repeat="r in vm.navRoutes">
-            <a ui-sref="{{r.name}}" ng-bind-html="r.settings.content"></a>
+            <!-- <a ui-sref="{{r.name}}" ng-bind-html="r.settings.content"></a> -->
+            <a ui-sref="{{r.name}}" translate="{{r.title}}"></a>
         </li>
               
         
-        <li  ng-hide="!vm.isAuthservicePresent || $root.authUser" ui-sref="login"><a><i  class="fa fa-sign-in"></i> Sign in</a></li>
+        <li  ng-hide="!vm.isAuthservicePresent || $root.authUser" ui-sref="login"><a><i  class="fa fa-sign-in" ></i> {{'SIGN_IN' | translate}}</a></li>
  
 
         <li ng-hide="!vm.isAuthservicePresent || $root.authUser" >

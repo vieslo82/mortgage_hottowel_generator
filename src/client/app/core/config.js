@@ -27,25 +27,26 @@
   function configure($translatePartialLoaderProvider,$translateProvider,$logProvider, 
                     routerHelperProvider,exceptionHandlerProvider) {
 
-    $translateProvider.registerAvailableLanguageKeys(['ca','es','en'],{
+
+    $translateProvider.registerAvailableLanguageKeys(['ca','en'],{
       'ca-ES': 'ca',
-      'es-US': 'es',
-      'es-ES': 'es',
       'en-US': 'en'
     });
+    /*$translateProvider.useStaticFilesLoader({
+      prefix: '/app/core/i18n/',
+      suffix: '.json'
+    });*/
 
-    $translateProvider.determinePreferredLanguage();
     $translatePartialLoaderProvider.addPart('core');
     $translateProvider.useLoader('$translatePartialLoader', {
-      urlTemplate: '/app/{part}/i18n/{lang}.json'
+      urlTemplate: '/app/{part}/i18n/{lang}.json',
+      loadFailureHandler: 'MyErrorHandler'
     });
+    $translateProvider.useCookieStorage();
 
     $translateProvider
-      //.preferredLanguage('es')
-      //.useStaticFilesLoader({
-      //  prefix: '/app/i18n/',
-      //  suffix: '.json'
-      //})
+      .determinePreferredLanguage()
+      .fallbackLanguage('en')
       .useSanitizeValueStrategy('sanitize');
 
     if ($logProvider.debugEnabled) {
