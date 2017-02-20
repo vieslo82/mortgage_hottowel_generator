@@ -113,7 +113,7 @@ gulp.task('i18n', ['clean-i18n'], function() {
  * @param  {Function} done - callback when complete
  */
 gulp.task('clean-i18n', function(done) {
-  clean(config.build + 'images/**/*.*', done);
+  clean(config.build + 'i18n/**/*.*', done);
 });
 
 gulp.task('less-watcher', function() {
