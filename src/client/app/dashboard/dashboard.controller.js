@@ -5,11 +5,11 @@
     .module('app.dashboard')
     .controller('DashboardController', DashboardController);
 
-  DashboardController.$inject = ['$translatePartialLoader','$injector','NgMap','$rootScope','$window','$q','dataservice',
-                                'logger', '$firebaseArray'];
+  DashboardController.$inject = ['$translatePartialLoader','$injector','NgMap','$rootScope',
+                            '$window','$q','dataservice','logger', '$firebaseArray'];
   /* @ngInject */
-  function DashboardController($translatePartialLoader,$injector,NgMap, $rootScope,$window, $q,dataservice,
-                                logger, $firebaseArray) {
+  function DashboardController($translatePartialLoader,$injector,NgMap, $rootScope,$window,
+                                $q,dataservice,logger, $firebaseArray) {
     var vm = this;
     //Map centered on spain
     //vm.map = { center: { latitude: 39.5770969, longitude: -3.5280415 }, zoom: 6 };

@@ -96,6 +96,26 @@ gulp.task('images', ['clean-images'], function() {
     .pipe(gulp.dest(config.build + 'images'));
 });
 
+/**
+ * Copy i18n partial translations
+ * @return {Stream}
+ */
+gulp.task('i18n', ['clean-i18n'], function() {
+  log('Copying partial i18n translations');
+
+  return gulp
+    .src(config.i18n)
+    .pipe(gulp.dest(config.build + 'i18n'));
+});
+
+/**
+ * Remove all i18n partial translations
+ * @param  {Function} done - callback when complete
+ */
+gulp.task('clean-i18n', function(done) {
+  clean(config.build + 'images/**/*.*', done);
+});
+
 gulp.task('less-watcher', function() {
   gulp.watch([config.less], ['styles']);
 });
@@ -191,7 +211,7 @@ gulp.task('build-specs', ['templatecache'], function(done) {
  * This is separate so we can run tests on
  * optimize before handling image or fonts
  */
-gulp.task('build', ['optimize', 'images', 'fonts'], function() {
+gulp.task('build', ['optimize', 'images','i18n','fonts'], function() {
   log('Building everything');
 
   var msg = {
@@ -209,8 +229,8 @@ gulp.task('build', ['optimize', 'images', 'fonts'], function() {
  * and inject them into the new index.html
  * @return {Stream}
  */
-//gulp.task('optimize', ['inject', 'test'], function() {
-gulp.task('optimize', ['inject'], function() {
+gulp.task('optimize', ['inject', 'test'], function() {
+  //gulp.task('optimize', ['inject'], function() {
   log('Optimizing the js, css, and html');
 
   var assets = $.useref.assets({ searchPath: './' });

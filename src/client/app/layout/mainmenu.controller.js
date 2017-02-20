@@ -42,11 +42,11 @@
       var authservice;
       try {
         authservice = $injector.get('authservice');
-        console.log('Injector has authservice service!')
+        console.log('Injector has authservice service!');
         vm.isAuthservicePresent = true;
       }catch (e) {
         vm.isAuthservicePresent = false;
-        console.log('Injector has NOT authservice service!')
+        console.log('Injector has NOT authservice service!');
       }
       if (authservice) {
         return authservice.isLoggedin().then(function(data) {
@@ -61,7 +61,7 @@
     function setLang(langKey) {
       // You can change the language during runtime
       $translate.use(langKey);
-    };
+    }
 
     function isCurrent(route) {
       if (!route.title || !$state.current || !$state.current.title) {

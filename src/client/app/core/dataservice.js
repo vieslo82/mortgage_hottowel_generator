@@ -13,7 +13,6 @@
           messagingSenderId: '978656105531'
         };
 
-      //if (!firebase.getInstance('FirebaseAPP')) {
       if (firebase.apps.length === 0) {
         firebase.initializeApp(config);
       }
@@ -32,6 +31,7 @@
 
     return service;
 
+    //Get number of lawyers present at the web app at the moment
     function getMessageCount() {
       var deferred = $q.defer();
       getPeople().then(function(peopleArray) {
@@ -41,7 +41,7 @@
        });
       return deferred.promise;
     }
-    //DEPRECATED
+    //Get list lawyers
     function getPeople() {
       return $http.get('/api/people')
         .then(success)
