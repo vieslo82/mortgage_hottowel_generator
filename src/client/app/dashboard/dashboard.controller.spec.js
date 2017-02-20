@@ -2,11 +2,13 @@
 describe('DashboardController', function() {
   var controller;
   var people = mockData.getMockPeople();
+  var mortgages = mockData.getMockMortgages();
 
+  var thereisAuth = true;
   beforeEach(function() {
     bard.appModule('app.dashboard');
     bard.inject('$controller','$translatePartialLoader','$injector','NgMap','$rootScope','$window',
-                '$q','$log', '$firebaseArray','$rootScope');
+                '$q','$log','$firebaseArray','$rootScope');
   });
 
   beforeEach(function() {
@@ -19,6 +21,11 @@ describe('DashboardController', function() {
         return $q.when(7);
       },
       getFake: function() {}
+    };
+    var authService = {
+      isLoggedIn: function() {
+        return $q.when(thereisAuth);
+      }
     };
     controller = $controller('DashboardController',{
       dataservice: ds
@@ -42,8 +49,20 @@ describe('DashboardController', function() {
         expect($log.info.logs).to.match(/Activated/);
       });
 
+      it('controler.map (Google maps API) should be created successfully', function() {
+        expect(controller.map).to.be.defined;
+      });
+
+      it('controler.map markers (Google maps API) equal people.length', function() {
+        expect(controller.map.markers).to.not.be.empty;
+      });
+
       it('should have mortgageInfo', function() {
         expect(controller.mortgageInfo).to.not.be.empty;
+      });
+
+      it('should have at leaast 1 mortgage', function() {
+        expect(controller.mortgagesList).to.not.be.empty;
       });
 
       it('should have at least 1 person', function() {

@@ -14,11 +14,11 @@ var github = githubhook({
 // listen to push on github on branch master
 github.on('push', function (repo, ref, data) {
   function puts(error, stdout, stderr) { sys.puts(stdout);}
-  exec('sudo forever stopall',puts);
-  exec('unset \'GIT_DIR\'',puts);
+  exec('deploy.sh',puts);
+  //exec('unset \'GIT_DIR\'',puts);
   //exec('cd ~/mortgage.git && git fetch origin && git pull origin master && npm install
   //&& sudo PORT=80 NODE_ENV=build forever start src/server/app.js',puts);
-  exec('exec git update-server-info',puts);
+  //exec('exec git update-server-info',puts);
 });
 
 // listen to github push
