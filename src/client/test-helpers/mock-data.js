@@ -47,7 +47,30 @@ var mockData = (function() {
   }
 
   function getMockMortgages() {
-    return [];
+    return [{
+      '7855032' : {
+        'ape1' : '',
+        'ape2' : '',
+        'dadesEconomiques' : {
+          'capital' : 31231,
+          'diferencial' : 1,
+          'euribor' : 1,
+          'ingresosMensuals' : 2131,
+          'producteNomina' : false,
+          'producteSegurCasa' : false,
+          'producteSegurVida' : false,
+          'terminiAnys' : 1,
+          'tipusInteres' : 'variable'
+        },
+        'email' : '',
+        'interesAplicat' : '2 %',
+        'nif' : '',
+        'nombre' : '',
+        'quotaMensual' : '2.630,864 €',
+        'telefono' : '',
+        'totalInteresos' : '339,369 €'
+      }
+    }];
   }
 })();
 

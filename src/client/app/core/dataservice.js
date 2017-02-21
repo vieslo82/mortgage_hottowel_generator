@@ -19,14 +19,15 @@
     });
 
   dataservice.$inject = ['$rootScope','$state','$window','$http', '$q',
-                        'exception', 'logger','localStorageService'];
+                        'exception', 'logger','localStorageService','$firebaseArray'];
   /* @ngInject */
   function dataservice($rootScope,$state,$window, $http, $q,
-                      exception, logger, localStorageService) {
+                      exception, logger, localStorageService,$firebaseArray) {
 
     var service = {
       getPeople: getPeople,
-      getMessageCount: getMessageCount
+      getMessageCount: getMessageCount,
+      getMortgageList: getMortgageList
     };
 
     return service;
@@ -54,6 +55,16 @@
       function fail(e) {
         return exception.catcher('XHR Failed for getPeople')(e);
       }
+    }
+
+    function getMortgageList(userId) {
+      var ref = firebase.database().ref().child('hipotecas/' + userId);
+      if (ref) {
+        return $firebaseArray(ref);
+      }else {
+        return 'Cannot connect firebase to get Mortgage List ';
+      }
+
     }
   }
 })();

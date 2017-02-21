@@ -20,15 +20,22 @@ describe('DashboardController', function() {
       getMessageCount:function() {
         return $q.when(7);
       },
+      getMortgageList: function() {
+        return $q.when(mortgages);
+      },
       getFake: function() {}
     };
+
     var authService = {
       isLoggedIn: function() {
         return $q.when(thereisAuth);
+      },
+      popopo: function() {
+
       }
     };
     controller = $controller('DashboardController',{
-      dataservice: ds
+      dataservice: ds,authservice: authService
     });
     $rootScope.$apply();
   });
@@ -61,7 +68,8 @@ describe('DashboardController', function() {
         expect(controller.mortgageInfo).to.not.be.empty;
       });
 
-      it('should have at leaast 1 mortgage', function() {
+      it('With authenticated user should have at least 1 mortgage', function() {
+        $rootScope.authUser = { 'id': '343242', 'displayName': 'admin' };
         //expect(controller.mortgagesList).to.not.be.empty;
       });
 

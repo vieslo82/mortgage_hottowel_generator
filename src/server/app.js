@@ -54,7 +54,12 @@ switch (environment) {
       key: fs.readFileSync('privkey1.pem'),
       cert: fs.readFileSync('cert1.pem')
     }, app).listen(port);
-    app.use(forceSSL);
+
+    app.use(forceSSL); //MODULE USED TO FORCE REDIRECTION
+    console.log('WARNING: BE CAREFULL, WE ARE TRYING TO LAUNCH SERVER ON PORT 80.' +
+                'CHECK IF ANY OTHER SERVER IS LISTENING ON SAME PORT (APACHE...)' +
+                'WE WANT TO FORCE HTTP TO HTTPS REDIRECTION ALWAYS');
+
     http.createServer(app).listen(80);
     break;
   default:
