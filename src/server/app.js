@@ -3,6 +3,8 @@
 
 var fs = require('fs');
 var https = require('https');
+var http = require('http');
+var forceSSL = require('express-force-ssl');
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -52,7 +54,8 @@ switch (environment) {
       key: fs.readFileSync('privkey1.pem'),
       cert: fs.readFileSync('cert1.pem')
     }, app).listen(port);
-
+    app.use(forceSSL);
+    http.createServer(app).listen(80);
     break;
   default:
     console.log('** DEV **');
