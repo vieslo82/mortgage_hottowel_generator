@@ -2,7 +2,8 @@
 var mockData = (function() {
   return {
     getMockPeople: getMockPeople,
-    getMockStates: getMockStates
+    getMockStates: getMockStates,
+    getMockMortgages: getMockMortgages
   };
 
   function getMockStates() {
@@ -44,4 +45,9 @@ var mockData = (function() {
     location: 'Bilbao',lat:'43.260224',lng:'-3.934508'}
     ];
   }
+
+  function getMockMortgages() {
+    return [];
+  }
 })();
+
