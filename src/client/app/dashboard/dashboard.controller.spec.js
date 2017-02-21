@@ -20,22 +20,32 @@ describe('DashboardController', function() {
       getMessageCount:function() {
         return $q.when(7);
       },
-      getMortgageList: function() {
-        return $q.when(mortgages);
+      getMortgageList: function(idUser) {
+        //return $q.when(mortgages);
+        return mortgages;
       },
       getFake: function() {}
     };
 
-    var authService = {
-      isLoggedIn: function() {
-        return $q.when(thereisAuth);
+    var authServ = {
+      isLoggedin: function() {
+        return $q.when({ 'id': '343242', 'displayName': 'admin' });
       },
       popopo: function() {
 
       }
     };
+
+    var inject = {
+      get: function(serviceName) {
+        if (serviceName === 'authservice') {
+          return authServ;
+        }
+      }
+    };
+
     controller = $controller('DashboardController',{
-      dataservice: ds,authservice: authService
+      dataservice: ds,$injector: inject
     });
     $rootScope.$apply();
   });
@@ -60,7 +70,7 @@ describe('DashboardController', function() {
         expect(controller.map).to.be.defined;
       });
 
-      it('controler.map markers (Google maps API) equal people.length', function() {
+      it('controler.map markers (Google maps API) equal people.length', function() {        
         //expect(controller.map.markers).to.not.be.empty;
       });
 
@@ -69,8 +79,8 @@ describe('DashboardController', function() {
       });
 
       it('With authenticated user should have at least 1 mortgage', function() {
-        $rootScope.authUser = { 'id': '343242', 'displayName': 'admin' };
-        //expect(controller.mortgagesList).to.not.be.empty;
+        //$rootScope.authUser = { 'id': '343242', 'displayName': 'admin' };
+        expect(controller.mortgagesList).to.not.be.empty;
       });
 
       it('should have at least 1 person', function() {
