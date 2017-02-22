@@ -70,8 +70,8 @@ describe('DashboardController', function() {
         expect(controller.map).to.be.defined;
       });
 
-      it('controler.map markers (Google maps API) equal people.length', function() {        
-        //expect(controller.map.markers).to.not.be.empty;
+      it('controler.map markers (Google maps API) equal people.length', function(done) {
+        expect(controller.map.markers).to.not.be.empty;
       });
 
       it('should have mortgageInfo', function() {

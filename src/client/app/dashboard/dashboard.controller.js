@@ -17,13 +17,13 @@
 
     $translatePartialLoader.addPart('dashboard');
 
-    NgMap.getMap().then(function(map) {
+   /*NgMap.getMap().then(function(map) {
       vm.map = map;
       vm.map.setZoom(7);
       dataservice.getPeople().then(function(people) {
         vm.lawyers = people;
       });
-    });
+    });*/
 
     function showDetailLawyer(e, lawyer) {
       vm.lawyer = lawyer;
@@ -58,9 +58,19 @@
 
     function activate() {
       getMortgageList();
-      var promises = [getMessageCount(), getPeople()];
+      var promises = [getLawyersMap(),getMessageCount(), getPeople()];
       return $q.all(promises).then(function() {
         logger.info('Activated Dashboard View');
+      });
+    }
+
+    function getLawyersMap() {
+      return NgMap.getMap().then(function(map) {
+        vm.map = map;
+        vm.map.setZoom(7);
+        dataservice.getPeople().then(function(people) {
+        vm.lawyers = people;
+      });
       });
     }
 
