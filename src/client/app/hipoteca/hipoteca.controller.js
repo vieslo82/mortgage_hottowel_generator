@@ -148,9 +148,6 @@ function HipotecaController($injector,$rootScope,$firebaseArray,$q,$stateParams,
                      }
                    }
          );
-  /*$scope.$watch('vm.hipoteca.dadesEconomiques.capital', function(current, original) {
-             logger.info('vm.hipoteca.capital was %s', original);
-             logger.info('vm.hipoteca.capital is now %s', current);
-        });*/
+
 }
 })();

@@ -11,10 +11,10 @@ describe('DashboardController', function() {
   var injectFake;
 
   beforeEach(function() {
-    bard.appModule('app.dashboard');
-
+    //bard.appModule('app.dashboard');
+    module('app.dashboard');
     bard.inject('$controller','$rootScope',
-                '$q','$log','$state');
+                '$q','$log');
     //sinon.stub(dataservice, 'getPeople').returns($q.when(people));
     dsFake = {
       getPeople: function() {
@@ -75,7 +75,8 @@ describe('DashboardController', function() {
 
       it('We expect dashboard $state', function() {
         $rootScope.$apply();
-        expect($state.current.name).to.equal('Dashboard');
+        expect($state.is('dashboard'));
+        //expect($state.current.name).to.equal('Dashboard');
       });
 
       it('should have logged "Activated"', function() {
@@ -96,12 +97,11 @@ describe('DashboardController', function() {
       });
 
       it('With authenticated user should have at least 1 mortgage', function() {
-        //$rootScope.authUser = { 'id': '343242', 'displayName': 'admin' };
         expect(controller.mortgagesList).to.not.be.empty;
       });
 
       it('part loaded for i18n translations should be dashboard'), function() {
-        expect(controller.$translatePartialLoader.getPart()).to.equal('dashboard');
+        expect($translatePartialLoader.getPart()).to.equal('dashboard');
       };
 
       it('With non authenticated user should have 0 mortgages', function() {

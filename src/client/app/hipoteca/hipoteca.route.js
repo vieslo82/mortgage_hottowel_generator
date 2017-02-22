@@ -23,7 +23,7 @@
           title: 'NEW_MORTGAGE',
           settings: {
             nav: 2,
-            content: '<i class="fa fa-file"></i>New mortgage'
+            //content: '<i class="fa fa-file"></i>New mortgage'
           },
           resolve:{
             loggedin: routerHelper.checkLoggedin

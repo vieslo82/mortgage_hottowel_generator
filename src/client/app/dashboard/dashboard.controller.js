@@ -11,8 +11,6 @@
   function DashboardController($translatePartialLoader,$injector,NgMap, $rootScope,$window,
                                 $q,dataservice,logger) {
     var vm = this;
-    //Map centered on spain
-    //vm.map = { center: { latitude: 39.5770969, longitude: -3.5280415 }, zoom: 6 };
     vm.showDetailLawyer = showDetailLawyer;
 
     $translatePartialLoader.addPart('dashboard');
@@ -39,8 +37,6 @@
       console.log('Injector has NOT authservice service!');
     }
 
-    //var ref = firebase.database().ref().child("hipotecas");
-    //vm.mortgagesList = $firebaseArray(ref);
     vm.messageCount = 0;
     vm.people = [];
     vm.mortgagesList = [];
@@ -60,9 +56,7 @@
       return NgMap.getMap().then(function(map) {
         vm.map = map;
         vm.map.setZoom(7);
-        //dataservice.getPeople().then(function(people) {
         vm.lawyers = vm.people;
-        //});
       });
     }
 
@@ -85,12 +79,6 @@
           $rootScope.authUser = data;
           if ($rootScope.authUser && $rootScope.authUser.id) {
             vm.mortgagesList = dataservice.getMortgageList($rootScope.authUser.id);
-            //var ref = firebase.database().ref().child('hipotecas/' + $rootScope.authUser.id);
-            //vm.mortgagesList = $firebaseArray(ref);
-            /*return dataservice.getMortgageList($rootScope.authUser.id).then(function(data) {
-              vm.mortgagesList = data;
-              return vm.mortgagesList;
-            });*/
           }
         });
       }

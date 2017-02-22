@@ -32,10 +32,6 @@
       'en-US': 'en',
       'en-UK': 'en'
     });
-    /*$translateProvider.useStaticFilesLoader({
-      prefix: '/app/core/i18n/',
-      suffix: '.json'
-    });*/
 
     $translatePartialLoaderProvider.addPart('core');
     $translateProvider.useLoader('$translatePartialLoader', {

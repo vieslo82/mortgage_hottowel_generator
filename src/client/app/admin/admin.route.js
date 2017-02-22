@@ -20,10 +20,10 @@
           templateUrl: 'app/admin/admin.html',
           controller: 'AdminController',
           controllerAs: 'vm',
-          title: 'PROFILE',
+          title: 'Admin',
           settings: {
             nav: 3,
-            content: '<i class="fa fa-lock"></i> Profile'
+            //content: '<i class="fa fa-lock"></i> Admin'
           },
 
           resolve:{
