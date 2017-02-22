@@ -1,5 +1,5 @@
 /* jshint -W117, -W030 */
-describe('core dataservice', function () {
+describe('Dataservice (CORE)', function () {
 
   var $httpFlush;
 
@@ -15,7 +15,7 @@ describe('core dataservice', function () {
     expect(dataservice).not.to.equal(null);
   });
 
-  describe('when call people (lawyers)', function () {
+  describe('when call people (lawyers) and it returns 2xx', function () {
     var people;
     beforeEach(function() {
       people = mockData.getMockPeople();
@@ -43,7 +43,24 @@ describe('core dataservice', function () {
     });
   });
 
-  describe('ready function', function () {
+  describe('when call people (lawyers) and server fails', function () {
+    var people;
+    beforeEach(function() {
+      people = mockData.getMockPeople();
+      $httpBackend.when('GET', '/api/people')
+                    .respond(500, {description:'you fail'});
+    });
+
+    it('getPeople (lawyers) reports error if server fails', function () {
+      dataservice.getPeople()
+        .catch(function(error) {
+          expect(error).to.exist;
+        });
+      $httpFlush();
+    });
+  });
+
+  /*describe('ready function', function () {
 
     it('should return a resolved promise with the dataservice itself', function () {
       dataservice.ready()
@@ -52,5 +69,5 @@ describe('core dataservice', function () {
             });
       $rootScope.$apply(); // no $http so just flush $q
     });
-  });
+  });*/
 });

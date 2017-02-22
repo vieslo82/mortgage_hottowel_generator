@@ -17,14 +17,6 @@
 
     $translatePartialLoader.addPart('dashboard');
 
-   /*NgMap.getMap().then(function(map) {
-      vm.map = map;
-      vm.map.setZoom(7);
-      dataservice.getPeople().then(function(people) {
-        vm.lawyers = people;
-      });
-    });*/
-
     function showDetailLawyer(e, lawyer) {
       vm.lawyer = lawyer;
       vm.map.showInfoWindow('foo-iw', lawyer.id);
@@ -58,7 +50,7 @@
 
     function activate() {
       getMortgageList();
-      var promises = [getLawyersMap(),getMessageCount(), getPeople()];
+      var promises = [getMessageCount(), getPeople(),getLawyersMap()];
       return $q.all(promises).then(function() {
         logger.info('Activated Dashboard View');
       });
@@ -68,9 +60,9 @@
       return NgMap.getMap().then(function(map) {
         vm.map = map;
         vm.map.setZoom(7);
-        dataservice.getPeople().then(function(people) {
-        vm.lawyers = people;
-      });
+        //dataservice.getPeople().then(function(people) {
+        vm.lawyers = vm.people;
+        //});
       });
     }
 

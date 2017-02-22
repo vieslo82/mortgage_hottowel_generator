@@ -3,7 +3,8 @@ var mockData = (function() {
   return {
     getMockPeople: getMockPeople,
     getMockStates: getMockStates,
-    getMockMortgages: getMockMortgages
+    getMockMortgages: getMockMortgages,
+    getMockMap: getMockMap
   };
 
   function getMockStates() {
@@ -72,5 +73,10 @@ var mockData = (function() {
       }
     }];
   }
+
+  function getMockMap() {
+    return {markers:[],setZoom: function(zoom) {}};
+  }
+
 })();
 

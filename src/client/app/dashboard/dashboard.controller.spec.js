@@ -3,17 +3,20 @@ describe('DashboardController', function() {
   var controller;
   var people = mockData.getMockPeople();
   var mortgages = mockData.getMockMortgages();
+  var map = mockData.getMockMap();
 
-  var thereisAuth = true;
+  var authServFake;
+  var dsFake;
+  var ngmapFake;
+  var injectFake;
+
   beforeEach(function() {
     bard.appModule('app.dashboard');
-    bard.inject('$controller','$translatePartialLoader','$injector','NgMap','$rootScope','$window',
-                '$q','$log','$firebaseArray','$rootScope');
-  });
 
-  beforeEach(function() {
+    bard.inject('$controller','$rootScope',
+                '$q','$log','$state');
     //sinon.stub(dataservice, 'getPeople').returns($q.when(people));
-    var ds = {
+    dsFake = {
       getPeople: function() {
         return $q.when(people);
       },
@@ -23,31 +26,33 @@ describe('DashboardController', function() {
       getMortgageList: function(idUser) {
         //return $q.when(mortgages);
         return mortgages;
-      },
-      getFake: function() {}
-    };
-
-    var authServ = {
-      isLoggedin: function() {
-        return $q.when({ 'id': '343242', 'displayName': 'admin' });
-      },
-      popopo: function() {
-
       }
     };
 
-    var inject = {
+    ngmapFake = {
+      getMap: function() {
+        return $q.when(map);
+      }
+    };
+
+    authServFake = {
+      isLoggedin: function() {
+        return $q.when({ 'id': '343242', 'displayName': 'admin' });
+      }
+    };
+
+    injectFake = {
       get: function(serviceName) {
         if (serviceName === 'authservice') {
-          return authServ;
+          return authServFake;
         }
       }
     };
 
     controller = $controller('DashboardController',{
-      dataservice: ds,$injector: inject
+      dataservice: dsFake,$injector: injectFake, NgMap: ngmapFake
     });
-    $rootScope.$apply();
+
   });
 
   //bard.verifyNoOutstandingHttpRequests();
@@ -57,9 +62,20 @@ describe('DashboardController', function() {
       expect(controller).to.be.defined;
     });
 
-    describe('after activate', function() {
+    describe('After activate dashboard', function() {
+      beforeEach(function() {
+        bard.inject('$state');
+        $state.current = {};
+        $rootScope.$apply();
+      });
+
       it('should have title of Dashboard', function() {
         expect(controller.title).to.equal('Dashboard');
+      });
+
+      it('We expect dashboard $state', function() {
+        $rootScope.$apply();
+        expect($state.current.name).to.equal('Dashboard');
       });
 
       it('should have logged "Activated"', function() {
@@ -71,7 +87,8 @@ describe('DashboardController', function() {
       });
 
       it('controler.map markers (Google maps API) equal people.length', function(done) {
-        expect(controller.map.markers).to.not.be.empty;
+        expect(controller.lawyers).to.not.be.empty;
+        done();
       });
 
       it('should have mortgageInfo', function() {
@@ -83,12 +100,25 @@ describe('DashboardController', function() {
         expect(controller.mortgagesList).to.not.be.empty;
       });
 
+      it('part loaded for i18n translations should be dashboard'), function() {
+        expect(controller.$translatePartialLoader.getPart()).to.equal('dashboard');
+      };
+
+      it('With non authenticated user should have 0 mortgages', function() {
+        //$rootScope.authUser = { 'id': '343242', 'displayName': 'admin' };
+        authServFake.isLoggedin = function() {return $q.when('0'); };
+        var controller2 = $controller('DashboardController',{
+          dataservice: dsFake,$injector: injectFake, NgMap: ngmapFake
+        });
+        expect(controller2.mortgagesList).to.be.empty;
+      });
+
       it('should have at least 1 person', function() {
         expect(controller.people).to.have.length.above(0);
       });
 
-      it('should have people count of 5', function() {
-        expect(controller.people).to.have.length(9);
+      it('should have people mock count of ' + people.length, function() {
+        expect(controller.people).to.have.length(people.length);
       });
     });
   });
