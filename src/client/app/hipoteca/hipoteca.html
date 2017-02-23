@@ -9,11 +9,10 @@
 <fieldset>
 
      <legend class="text-info">Economic data</legend>
-     <div class="form-group required">
+     <div class="form-group">
           <label class="control-label col-sm-6">MONTHLY INCOME:</label>
           <div class="col-sm-6">
-              <input required ng-model="vm.hipoteca.dadesEconomiques.ingresosMensuals"  id="ingresosMensuals" name="ingresosMensuals" placeholder="Ingresos mensuales" type="number" min="0" class="form-control">
-    <span class="text-danger" ng-show="mortgageForm.ingresosMensuals.$error.required && (mortgageForm.ingresosMensuals.$dirty || mortgageForm.ingresosMensuals.$touched)">El camp &eacute;s obligatori</span>
+              <input ng-model="vm.hipoteca.dadesEconomiques.ingresosMensuals"  id="ingresosMensuals" name="ingresosMensuals" placeholder="Ingresos mensuales" type="number" min="0" class="form-control">
           </div>
 
       </div>
@@ -37,12 +36,12 @@
           </div>
       </div>
 
-      <div class="form-group" ng-class="{required:vm.hipoteca.dadesEconomiques.tipusInteres==='variable'}">
-          <label class="control-label col-sm-6">EURIBOR:</label>
+      <div class="form-group" required">
+          <label class="control-label col-sm-6">MORTGAGE SET UP DATE:</label>
           <div class="col-sm-6">
 
-              <input ng-required="vm.hipoteca.dadesEconomiques.tipusInteres==='variable'" ng-model="vm.hipoteca.dadesEconomiques.euribor" ng-disabled="vm.hipoteca.dadesEconomiques.tipusInteres==='fixed' || vm.hipoteca.dadesEconomiques.tipusInteres===undefined" id="euribor" type="number" name="euribor" placeholder="euribor" type="text" class="form-control" >
-    <span class="text-danger" ng-show="mortgageForm.euribor.$error.required && (mortgageForm.euribor.$dirty || mortgageForm.euribor.$touched)">El camp &eacute;s obligatori</span>
+              <input required ng-model="vm.hipoteca.dadesEconomiques.setupdate" id="setupdate" type="date" name="setupdate" placeholder="Set up date"  class="form-control" >
+    <span class="text-danger" ng-show="mortgageForm.setupdate.$error.required && (mortgageForm.setupdate.$dirty || mortgageForm.setupdate.$touched)">El camp &eacute;s obligatori</span>
 
           </div>
       </div>

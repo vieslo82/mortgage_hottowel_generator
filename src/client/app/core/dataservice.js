@@ -64,7 +64,10 @@
       }else {
         return 'Cannot connect firebase to get Mortgage List ';
       }
+    }
 
+    function getEuribor(dateStamp_) {
+      var ref = firebase.database().ref().child('euribor/' + userId);
     }
   }
 })();

@@ -5,11 +5,11 @@ angular
         .controller('HipotecaController', HipotecaController);
 
 HipotecaController.$inject = ['$injector','$rootScope','$firebaseArray','$q','$stateParams',
-                                '$scope','$window','localStorageService','logger'];
+                                '$scope','$window','localStorageService','logger','dataservice'];
 
 /* @ngInject */
 function HipotecaController($injector,$rootScope,$firebaseArray,$q,$stateParams,
-                                $scope,$window,localStorageService,logger) {
+                                $scope,$window,localStorageService,logger,dataservice) {
   var vm = this;
 
   //vm.authData = $firebaseAuth().$getAuth();
@@ -31,10 +31,7 @@ function HipotecaController($injector,$rootScope,$firebaseArray,$q,$stateParams,
       euribor:null,
       diferencial:null,
       interesFixe:null,
-      terminiAnys:null,
-      producteSegurCasa:false,
-      producteNomina:false,
-      producteSegurVida:false
+      terminiAnys:null
     },
     dataConstitucioHipoteca:null,
     interesSol:null,
@@ -81,6 +78,11 @@ function HipotecaController($injector,$rootScope,$firebaseArray,$q,$stateParams,
     }
   }
 
+  //Get closest euribor rate
+  function getEuribor(dateStamp_) {
+    return dataservice.getEuribor(dateStamp_);
+  }
+
   function calcularHipoteca() {
     var interesAplicat_ =  parseFloat(vm.hipoteca.dadesEconomiques.euribor) +
                            parseFloat(vm.hipoteca.dadesEconomiques.diferencial);
@@ -88,9 +90,6 @@ function HipotecaController($injector,$rootScope,$firebaseArray,$q,$stateParams,
     if (vm.hipoteca.dadesEconomiques.tipusInteres === 'fixed') {
       interesAplicat_ = parseFloat(vm.hipoteca.dadesEconomiques.interesFixe);
     }
-    if (vm.hipoteca.dadesEconomiques.producteNomina) { interesAplicat_ -= 0.05;}
-    if (vm.hipoteca.dadesEconomiques.producteSegurCasa) { interesAplicat_ -= 0.05;}
-    if (vm.hipoteca.dadesEconomiques.producteSegurVida) { interesAplicat_ -= 0.05;}
 
     vm.hipoteca.interesAplicat = interesAplicat_.toLocaleString() + ' %';
 
@@ -115,6 +114,8 @@ function HipotecaController($injector,$rootScope,$firebaseArray,$q,$stateParams,
 
   function calculateAmortizationPlan() {
     vm.hipoteca.plaAmortizatcio = [];
+    var liniaAmortitzacio = {'numPago':0,'saldoInicial':0,'quotaMensual':0,'aportacioParcial':0,'capital':0,
+                            'interes':0,'saldoFinal':0,'interesAcumulat':0};
   }
 
   function submitAndSaveHipoteca() {
