@@ -43,23 +43,18 @@
     // Check if the user is connected
     //================================================
     function checkLoggedin() {
-
-      return $http.get('/api/loggedin')
-        .then(success)
-        .catch(fail);
-
-      function success(responseUser) {
-        if (responseUser.data === '0') {
-          $rootScope.authUser = false;
-          $state.go('login');
-        }else {
-          $rootScope.authUser = responseUser.data;
-        }
-      }
-
-      function fail(e) {
-        return exception.catcher('XHR Failed for /api/loggedin')(e);
-      }
+      isLoggedin()
+        .then(function(responseUser) {
+          if (!responseUser) {
+            $rootScope.authUser = false;
+            $state.go('login');
+          }else {
+            $rootScope.authUser = responseUser;
+          }
+        })
+        .catch(function(e) {
+          return exception.catcher('XHR Failed for /api/loggedin')(e);
+        });
     }
 
     function isLoggedin() {

@@ -36,7 +36,8 @@ function HipotecaController($injector,$rootScope,$firebaseArray,$q,$stateParams,
       producteNomina:false,
       producteSegurVida:false
     },
-
+    dataConstitucioHipoteca:null,
+    interesSol:null,
     quotaMensual:null,
     interesAplicat:null,
     totalInteresos:null
@@ -111,6 +112,10 @@ function HipotecaController($injector,$rootScope,$firebaseArray,$q,$stateParams,
   /*function saveMortgage(){
             localStorageService.set('hipotecas', vm.hipotecas);
   }*/
+
+  function calculateAmortizationPlan() {
+    vm.hipoteca.plaAmortizatcio = [];
+  }
 
   function submitAndSaveHipoteca() {
     if (!$scope.mortgageForm.$valid) {

@@ -39,7 +39,8 @@
     "angular-translate-loader-partial": "^2.14.0",
     "angular-translate-loader-static-files": "^2.14.0",
     "angular-translate-storage-local": "^2.14.0",
-    "angular-translate-storage-cookie": "^2.14.0"
+    "angular-translate-storage-cookie": "^2.14.0",
+    "angular-ui-grid": "^4.0.2"
   },
   "resolutions": {
     "angular": "1.6.2",
