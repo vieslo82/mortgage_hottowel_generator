@@ -5,11 +5,11 @@ angular
         .controller('HipotecaController', HipotecaController);
 
 HipotecaController.$inject = ['$injector','$rootScope','$firebaseArray','$q','$stateParams',
-                                '$scope','$window','localStorageService','logger','dataservice'];
+                                '$scope','$state','localStorageService','logger','dataservice'];
 
 /* @ngInject */
 function HipotecaController($injector,$rootScope,$firebaseArray,$q,$stateParams,
-                                $scope,$window,localStorageService,logger,dataservice) {
+                                $scope,$state,localStorageService,logger,dataservice) {
   var vm = this;
 
   //vm.authData = $firebaseAuth().$getAuth();
@@ -42,6 +42,8 @@ function HipotecaController($injector,$rootScope,$firebaseArray,$q,$stateParams,
 
   vm.calcularHipoteca = calcularHipoteca;
   vm.resetValues = resetValues;
+
+  getEuribor(new Date());
   //vm.saveMortgage = saveMortgage;
   vm.submitAndSaveHipoteca = submitAndSaveHipoteca;
 
@@ -80,7 +82,17 @@ function HipotecaController($injector,$rootScope,$firebaseArray,$q,$stateParams,
 
   //Get closest euribor rate
   function getEuribor(dateStamp_) {
-    return dataservice.getEuribor(dateStamp_);
+    var mes = dateStamp_.getMonth();
+    var any = dateStamp_.getFullYear();
+    if (mes === 0) {
+      any = any - 1;
+      mes = 12;
+    }
+    dataservice.getEuribor(any,mes)
+    .then(function(euriborIr) {
+      vm.euriborMonthYear = mes + '/' + any;
+      vm.hipoteca.dadesEconomiques.euribor = euriborIr;
+    });
   }
 
   function calcularHipoteca() {
@@ -103,9 +115,9 @@ function HipotecaController($injector,$rootScope,$firebaseArray,$q,$stateParams,
   }
 
   function resetValues() {
-    vm.hipoteca.dadesEconomiques.interesFixe = undefined;
-    vm.hipoteca.dadesEconomiques.euribor = undefined;
-    vm.hipoteca.dadesEconomiques.diferencial = undefined;
+    vm.hipoteca.dadesEconomiques.interesFixe = null;
+    vm.hipoteca.dadesEconomiques.euribor = null;
+    vm.hipoteca.dadesEconomiques.diferencial = null;
   }
 
   /*function saveMortgage(){
@@ -130,11 +142,18 @@ function HipotecaController($injector,$rootScope,$firebaseArray,$q,$stateParams,
       }else {
         vm.hipotecas.$save(vm.hipoteca);
       }
-      $window.location.href = '/';
+      //$window.location.href = '/';
+      $state.go('dashboard');
 
       return true;
     }
   }
+  $scope.$watch(
+    'vm.hipoteca.dataConstitucioHipoteca',
+    function(newValue,oldValue) {
+      getEuribor(newValue);
+    }
+  );
 
   $scope.$watchCollection(
                    'vm.hipoteca.dadesEconomiques',

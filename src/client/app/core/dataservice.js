@@ -27,7 +27,8 @@
     var service = {
       getPeople: getPeople,
       getMessageCount: getMessageCount,
-      getMortgageList: getMortgageList
+      getMortgageList: getMortgageList,
+      getEuribor: getEuribor
     };
 
     return service;
@@ -66,8 +67,22 @@
       }
     }
 
-    function getEuribor(dateStamp_) {
-      var ref = firebase.database().ref().child('euribor/' + userId);
+    function getEuribor(year,month) {
+      var ref = firebase.database().ref('/euribor').orderByChild('year').equalTo(year);
+      var deferred = $q.defer();
+      $firebaseArray(ref).$loaded().then(function(euriborArray) {
+         var selectedIr = 0;
+         for (var i = 0; i < euriborArray.length; i++) {
+           if (euriborArray[i].month === month) {
+             selectedIr = euriborArray[i].interestRate;
+             break;
+           }
+         }
+         deferred.resolve(selectedIr);
+       },function (err) {
+         deferred.reject(err);
+       });
+      return deferred.promise;
     }
   }
 })();

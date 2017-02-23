@@ -30,7 +30,7 @@
           <label class="control-label col-sm-6">MORTGAGE SET UP DATE </label>
           <div class="col-sm-6">
 
-              <input required ng-model="vm.hipoteca.dadesEconomiques.setupdate" id="setupdate" type="date" name="setupdate" placeholder="Set up date"  class="form-control" >
+              <input required ng-model="vm.hipoteca.dataConstitucioHipoteca" id="setupdate" type="date" name="setupdate" placeholder="Set up date"  class="form-control" >
     <span class="text-danger" ng-show="mortgageForm.setupdate.$error.required && (mortgageForm.setupdate.$dirty || mortgageForm.setupdate.$touched)">El camp &eacute;s obligatori</span>
 
           </div>
@@ -48,7 +48,7 @@
 
       
       <div class="form-group" ng-class="{required:vm.hipoteca.dadesEconomiques.tipusInteres==='variable'}">
-          <label class="control-label col-sm-6">EURIBOR:</label>
+          <label class="control-label col-sm-6">EURIBOR {{vm.euriborMonthYear}}:</label>
           <div class="col-sm-6">
 
               <input ng-required="vm.hipoteca.dadesEconomiques.tipusInteres==='variable'" ng-model="vm.hipoteca.dadesEconomiques.euribor" ng-disabled="vm.hipoteca.dadesEconomiques.tipusInteres==='fixed' || vm.hipoteca.dadesEconomiques.tipusInteres===undefined" id="euribor" type="number" name="euribor" placeholder="euribor" type="text" class="form-control" >
