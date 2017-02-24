@@ -9,4 +9,3 @@ deploy.sh
 # other
 .tmp
 .vscode
-mortgage-calculator*.json

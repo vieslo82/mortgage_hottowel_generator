@@ -46,7 +46,6 @@
 
     function activate() {
       getMortgageList();
-      //dataservice.getEuribor(2007,2);
       var promises = [getMessageCount(), getPeople(),getLawyersMap()];
       return $q.all(promises).then(function() {
         logger.info('Activated Dashboard View');

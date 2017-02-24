@@ -1,21 +1,4 @@
-<script>
-$("body").vegas({
-    slides: [
-        { src: "/images/background1.jpg" },
-        { src: "/images/background3.jpg" },
-        { src: "/images/background4.jpg" },
-        { src: "/images/background5.jpg" },
-        { src: "/images/background6.jpg" },
-        { src: "/images/background7.jpg" },
-        { src: "/images/background8.jpg" }
-    ],
-    animation: 'random',
-    timer: false,
-    delay: 60000,
-    overlay: '/bower_components/vegas/dist/overlays/08.png'
-});
-</script>
-<section id="dashboard-view" class="mainbar" style="background: transparent;">
+<section id="dashboard-view" class="mainbar">
   <section class="matter">
     <div class="container">
       <div class="row">
@@ -23,16 +6,16 @@ $("body").vegas({
             
              <div  class"col-md-12">  
                 <a ng-hide="$root.authUser" ui-sref="hipoteca">
-                <div class="widget blightblue" style="opacity:0.8">
+                <div class="widget blightblue">
                   
-                  <div class="widget-content text-center text-info" style="padding:2.5em;">
+                  <div class="widget-content text-center text-info" style="padding:2.5em">
                         <span class="bold" style="color:white;font-size:1.8em;" ><i class="fa fa-money fa-lg"></i>{{'GROUND' | translate}}</span>
                   </div>   
 
                 </div></a>
               
                 <a ui-sref="hipoteca">
-                  <div class="widget bblue" style="opacity:0.8">               
+                  <div class="widget bblue">               
                   <div class="widget-content text-center text-info" style="padding:2.5em">
                         <span class="bold" style="color:white;font-size:1.8em;"><i class="fa fa-money fa-lg"> </i>{{'RECOVER_SET_UP' | translate}} </span>
                   </div>   
@@ -41,14 +24,14 @@ $("body").vegas({
 
               <div ng-hide="$root.authUser" class"col-md-12">  
                  <a ui-sref="hipoteca">
-                  <div class="widget bgreen" style="opacity:0.8">               
+                  <div class="widget bgreen">               
                   <div class="widget-content text-center text-info" style="padding:2.5em">
                         <span class="bold" style="color:white;font-size:2.5em;"><i class="fa fa-pencil fa-lg"> </i> {{'NEW_SIMULATION' | translate}} </span>
                   </div>   
                 </div></a>
               </div>
 
-             <div ng-show="$root.authUser" class="col-md-12 widget wgreen"  style="opacity:0.8">
+             <div ng-show="$root.authUser" class="col-md-12 widget wgreen">
             <div ht-widget-header title="{{'YOUR_SIMULATIONS' | translate}}" allow-collapse="true"></div>
             <div class="widget-content text-center text-info">
                 <table class="table table-condensed table-striped" >
@@ -87,7 +70,7 @@ $("body").vegas({
 
         </div>
          <div class="col-md-6">
-          <div class="widget borange"  style="opacity:0.8">               
+          <div class="widget borange">               
                <div class="widget-content text-center text-info" style="padding:2.5em">
                     <span class="bold" style="color:white;font-size:1.8em;"><i class="fa fa-balance-scale fa-lg"></i>&nbsp;{{vm.messageCount}} {{'LAWYERS_AROUND' | translate}}</span>
                </div>

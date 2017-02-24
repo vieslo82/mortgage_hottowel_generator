@@ -5,14 +5,15 @@
 <form name="mortgageForm" novalidate method="POST" class="form-horizontal" id="formulario_products"  ng-submit="vm.submitAndSaveHipoteca()" >
 
   <div class="row">
-  <div class="col-sm-6">    
+  <div class="col-sm-12">    
 <fieldset>
 
      <legend class="text-info">Economic data</legend>
-     <div class="form-group">
+     <div class="form-group required">
           <label class="control-label col-sm-6">MONTHLY INCOME:</label>
           <div class="col-sm-6">
-              <input ng-model="vm.hipoteca.dadesEconomiques.ingresosMensuals"  id="ingresosMensuals" name="ingresosMensuals" placeholder="Ingresos mensuales" type="number" min="0" class="form-control">
+              <input required ng-model="vm.hipoteca.dadesEconomiques.ingresosMensuals"  id="ingresosMensuals" name="ingresosMensuals" placeholder="Ingresos mensuales" type="number" min="0" class="form-control">
+    <span class="text-danger" ng-show="mortgageForm.ingresosMensuals.$error.required && (mortgageForm.ingresosMensuals.$dirty || mortgageForm.ingresosMensuals.$touched)">El camp &eacute;s obligatori</span>
           </div>
 
       </div>
@@ -22,16 +23,6 @@
           <div class="col-sm-6">
               <input required ng-model="vm.hipoteca.dadesEconomiques.capital" id="capital" name="capital" placeholder="capital" type="number" class="form-control" >
     <span class="text-danger" ng-show="mortgageForm.capital.$error.required && (mortgageForm.capital.$dirty || mortgageForm.capital.$touched)">El camp &eacute;s obligatori</span>
-
-          </div>
-      </div>
-    
-    <div class="form-group" required>
-          <label class="control-label col-sm-6">MORTGAGE SET UP DATE </label>
-          <div class="col-sm-6">
-
-              <input required ng-model="vm.hipoteca.dataConstitucioHipoteca" id="setupdate" type="date" name="setupdate" placeholder="Set up date"  class="form-control" >
-    <span class="text-danger" ng-show="mortgageForm.setupdate.$error.required && (mortgageForm.setupdate.$dirty || mortgageForm.setupdate.$touched)">El camp &eacute;s obligatori</span>
 
           </div>
       </div>
@@ -46,9 +37,8 @@
           </div>
       </div>
 
-      
       <div class="form-group" ng-class="{required:vm.hipoteca.dadesEconomiques.tipusInteres==='variable'}">
-          <label class="control-label col-sm-6">EURIBOR {{vm.euriborMonthYear}}:</label>
+          <label class="control-label col-sm-6">EURIBOR:</label>
           <div class="col-sm-6">
 
               <input ng-required="vm.hipoteca.dadesEconomiques.tipusInteres==='variable'" ng-model="vm.hipoteca.dadesEconomiques.euribor" ng-disabled="vm.hipoteca.dadesEconomiques.tipusInteres==='fixed' || vm.hipoteca.dadesEconomiques.tipusInteres===undefined" id="euribor" type="number" name="euribor" placeholder="euribor" type="text" class="form-control" >
@@ -86,32 +76,6 @@
 
 </fieldset>
 </div>
- <div class="col-sm-6">    
-
-      <fieldset>
-
-             <legend class="text-info">RESULTS</legend>
-          <div class="form-group">
-              <label class="control-label col-sm-6">Monthly quote</label>
-              <div class="col-sm-6">
-                  <input ng-model="vm.hipoteca.quotaMensual" id="monthlyQuote" name="monthlyQuote" readonly  placeholder="Monthly quote" type="text" class="form-control" >
-              </div>
-          </div>
-          <div class="form-group">
-              <label class="control-label col-sm-6">Interest rate applied</label>
-              <div class="col-sm-6">
-                  <input ng-model="vm.hipoteca.interesAplicat" id="interestApplied" name="interestApplied" readonly  placeholder="Interest Applied" type="text" class="form-control">
-              </div>
-          </div>
-          <input name="send" type="submit" value="SAVE MORTGAGE INFO" >
-      </div>
-    <div class="col-sm-4">
-        <h3>Interest paid: {{vm.hipoteca.totalInteresos}}</h3>
-    </div>
-     </div>
- </form>
-</div>
-
 
 <!-- <div class="col-sm-6" ng-hide="$root.authUser">
 <fieldset>
@@ -177,8 +141,9 @@
 </fieldset>
 </div> -->
 </div>
-
-<!-- <fieldset>
+<div class="row">
+<div class="col-sm-4">
+<fieldset>
 
    <legend class="text-info">Associated products</legend>
    <div class="checkbox">
@@ -200,7 +165,32 @@
           <input ng-model="vm.hipoteca.dadesEconomiques.producteSegurVida" name="lifeInsurance" id="lifeInsurance" type="checkbox" class="form-control">
       </div>
  </div>
-</fieldset> -->
+</fieldset>
+</div>
+      <div class="col-sm-4">
+      <fieldset>
+
+             <legend class="text-info">RESULTS</legend>
+          <div class="form-group">
+              <label class="control-label col-sm-6">Monthly quote</label>
+              <div class="col-sm-6">
+                  <input ng-model="vm.hipoteca.quotaMensual" id="monthlyQuote" name="monthlyQuote" readonly  placeholder="Monthly quote" type="text" class="form-control" >
+              </div>
+          </div>
+          <div class="form-group">
+              <label class="control-label col-sm-6">Interest rate applied</label>
+              <div class="col-sm-6">
+                  <input ng-model="vm.hipoteca.interesAplicat" id="interestApplied" name="interestApplied" readonly  placeholder="Interest Applied" type="text" class="form-control">
+              </div>
+          </div>
+          <input name="send" type="submit" value="SAVE MORTGAGE INFO" >
+      </div>
+    <div class="col-sm-4">
+        <h3>Interest paid: {{vm.hipoteca.totalInteresos}}</h3>
+    </div>
+     </div>
+ </form>
+</div>
 <div class="widget-foot">
   <div class="clearfix"></div>
 </div>
