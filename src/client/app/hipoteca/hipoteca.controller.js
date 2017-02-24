@@ -82,17 +82,22 @@ function HipotecaController($injector,$rootScope,$firebaseArray,$q,$stateParams,
 
   //Get closest euribor rate
   function getEuribor(dateStamp_) {
-    var mes = dateStamp_.getMonth();
-    var any = dateStamp_.getFullYear();
-    if (mes === 0) {
-      any = any - 1;
-      mes = 12;
+    try {
+      var mes = dateStamp_.getMonth();
+      var any = dateStamp_.getFullYear();
+      if (mes === 0) {
+        any = any - 1;
+        mes = 12;
+      }
+      dataservice.getEuribor(any,mes)
+      .then(function(euriborIr) {
+        vm.euriborMonthYear = mes + '/' + any;
+        vm.hipoteca.dadesEconomiques.euribor = euriborIr;
+      });
+    } catch (error) {
+      vm.euriborMonthYear = '';
+      vm.hipoteca.dadesEconomiques.euribor = 0;
     }
-    dataservice.getEuribor(any,mes)
-    .then(function(euriborIr) {
-      vm.euriborMonthYear = mes + '/' + any;
-      vm.hipoteca.dadesEconomiques.euribor = euriborIr;
-    });
   }
 
   function calcularHipoteca() {
