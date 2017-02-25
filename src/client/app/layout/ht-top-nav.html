@@ -2,12 +2,20 @@
 $("body").vegas({
     slides: [
         { src: "/images/background1.jpg" },
+        { src: "/images/background2.jpg" },
         { src: "/images/background3.jpg" },
         { src: "/images/background4.jpg" },
         { src: "/images/background5.jpg" },
         { src: "/images/background6.jpg" },
         { src: "/images/background7.jpg" },
-        { src: "/images/background8.jpg" }
+        { src: "/images/background8.jpg" },
+        { src: "/images/background9.jpg" },
+        { src: "/images/background10.jpg" },
+        { src: "/images/background11.jpg" },
+        { src: "/images/background12.jpg" },
+        { src: "/images/background13.jpg" },
+        { src: "/images/background14.jpg" },
+        { src: "/images/background15.jpg" }
     ],
     shuffle:true,
     animation: 'random',
@@ -30,52 +38,61 @@ $("body").vegas({
   <div class="navbar-collapse collapse" uib-collapse="isCollapsed">
     <div class="pull-right navbar-logo" ng-controller="MainMenuController as vm">
       <ul class="nav navbar-nav pull-right" >
-        <li ng-repeat="r in vm.navRoutes">
+        <li class="nav-item" ng-repeat="r in vm.navRoutes">
             <!-- <a ui-sref="{{r.name}}" ng-bind-html="r.settings.content"></a> -->
             <a ui-sref="{{r.name}}" translate="{{r.title}}"></a>
         </li>
               
         
-        <li  ng-hide="!vm.isAuthservicePresent || $root.authUser" ui-sref="login"><a><i  class="fa fa-sign-in" ></i> {{'SIGN_IN' | translate}}</a></li>
+        <li  class="nav-item" ng-hide="!vm.isAuthservicePresent || $root.authUser" ui-sref="login"><a><i  class="fa fa-sign-in" ></i> {{'SIGN_IN' | translate}}</a></li>
  
 
-        <li ng-hide="!vm.isAuthservicePresent || $root.authUser" >
+        <li class="nav-item" ng-hide="!vm.isAuthservicePresent || $root.authUser" >
             <a target="_self" href="api/loginFacebook"><span  class="fa fa-facebook fa-lg"></span>
             </a>            
         </li> 
 
         <!-- <li ui-sref="loginTwitter" ng-hide="$root.authUser" > -->
-         <li ng-hide="!vm.isAuthservicePresent || $root.authUser" > 
+         <li class="nav-item" ng-hide="!vm.isAuthservicePresent || $root.authUser" > 
             <a target="_self" href="api/loginTwitter"><span   class="fa fa-twitter fa-lg"></span>
             </a>
             
         </li>
 
-        <!-- <li ng-click="vm.singin('google')" ng-hide="$root.authUser" >
-            <a><span  class="fa fa-google fa-lg"></span>
+        <li class="nav-item" ng-hide="!vm.isAuthservicePresent || $root.authUser" > 
+            <a target="_self" href="api/loginGoogle"><span  class="fa fa-google fa-lg"></span>
             </a>
-        </li> -->
+        </li> 
         <!-- User auth info -->
-        <li id="userAuthInfo" ng-show="$root.authUser">            
+        <li class="nav-item" id="userAuthInfo" ng-show="$root.authUser">            
             <a><img src="{{$root.authUser.photos[0].value}}" /> {{'WELCOME' | translate}}  {{ $root.authUser.displayName}}</a>
         </li>
 
         <!-- Logout button -->
-        <li id="logoutButton" ng-show="$root.authUser">
+        <li class="nav-item" id="logoutButton" ng-show="$root.authUser">
             <a target="_self" href="api/logout"><span class="fa fa-sign-out"></span>{{'LOGOUT' | translate}}</a>
-        </li>
-        <li>
-          <div class="dropdown nav navbar-nav pull-left">
-          <button id="dLabel" type="button" data-toggle="dropdown" translate="LANGUAGE">
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu">
+        </li>        
+
+          <!-- <li id="dLabel" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-menu-down">{{'LANGUAGE'|translate}}</span>
+          </li>
+           <ul class="dropdown-menu" role="menu">
             <li> <a ng-click="vm.setLang('en')" translate="ENGLISH">English</a></li>
             <li> <a ng-click="vm.setLang('ca')" translate="CATALA">Catala</a></li>
-          </ul> 
-      </div>
-        </li>
+          </ul> --> 
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           {{'LANGUAGE'|translate}} <span class="glyphicon glyphicon-menu-down"></span>
+        </a>
+        <div class="dropdown-menu">
+         <a ng-click="vm.setLang('en')" translate="ENGLISH">English</a>
+          <a ng-click="vm.setLang('es')" translate="CASTELLANO">Castellano</a>       
+         <a ng-click="vm.setLang('ca')" translate="CATALA">Catala</a>           
+        </div>
+      </li>
       </ul>
+      
+      
       
     </div>
     

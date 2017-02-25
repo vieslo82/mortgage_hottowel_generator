@@ -1,8 +1,9 @@
 {
       "TITLE": " Hipoteques ",
       "ADD_TITLE": "Calculador i comparador",
-      "ENGLISH": "EN",
-      "CATALA": "CAT",
+      "ENGLISH": "Anglés",
+      "CATALA": "Català",
+      "CASTELLANO": "Castellà",
       "LANGUAGE": "LLENGUA",
       "SIGN_IN": "Entrar",
       "DASHBOARD": "<i class='fa fa-dashboard'></i>&nbsp;Inici",

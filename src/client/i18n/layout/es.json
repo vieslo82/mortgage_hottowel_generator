@@ -1,0 +1,17 @@
+{
+      "TITLE": " Hipotecas ",
+      "ADD_TITLE": "Calculador y comparador",
+      "ENGLISH": "Inglés",
+      "CATALA": "Catalán",
+      "CASTELLANO": "Castellano",
+      "LANGUAGE": "LENGUA",
+      "SIGN_IN": "Entrar",
+      "DASHBOARD": "<i class='fa fa-dashboard'></i>&nbsp;Inico",
+      "CONTACT": "<i class='fa fa-envelope-o'></i>&nbsp;Contacto",
+      "PROFILE": "<i class='fa fa-lock'> </i>&nbsp;Perfil",
+      "NEW_MORTGAGE": "<i class='fa fa-file'></i>&nbsp;Nueva hipoteca",
+      "USER": "Usuario",
+      "WELCOME": "Bienvenido",
+      "LOGOUT": "Salir"
+
+}

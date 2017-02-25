@@ -1,8 +1,9 @@
 {
       "TITLE": " Mortgages",
       "ADD_TITLE": " Calculator and comparator",
-      "ENGLISH": "EN",
-      "CATALA": "CAT",
+      "ENGLISH": "English",
+      "CATALA": "Catalan",
+      "CASTELLANO": "Espanish",
       "LANGUAGE": "LANGUAGE",
       "SIGN_IN": "Sign in",
       "DASHBOARD": "<i class='fa fa-dashboard'></i>Home",

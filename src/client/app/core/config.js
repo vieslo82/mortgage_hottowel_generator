@@ -27,10 +27,11 @@
   function configure($translatePartialLoaderProvider,$translateProvider,$logProvider,
                     routerHelperProvider,exceptionHandlerProvider) {
 
-    $translateProvider.registerAvailableLanguageKeys(['ca','en'],{
+    $translateProvider.registerAvailableLanguageKeys(['es','ca','en'],{
       'ca-ES': 'ca',
       'en-US': 'en',
-      'en-UK': 'en'
+      'en-UK': 'en',
+      'es-ES': 'es'
     });
 
     $translatePartialLoaderProvider.addPart('core');
