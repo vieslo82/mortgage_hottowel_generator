@@ -1,7 +1,25 @@
+<script>
+$("body").vegas({
+    slides: [
+        { src: "/images/background1.jpg" },
+        { src: "/images/background3.jpg" },
+        { src: "/images/background4.jpg" },
+        { src: "/images/background5.jpg" },
+        { src: "/images/background6.jpg" },
+        { src: "/images/background7.jpg" },
+        { src: "/images/background8.jpg" }
+    ],
+    shuffle:true,
+    animation: 'random',
+    timer: false,
+    delay: 60000,
+    overlay: '/bower_components/vegas/dist/overlays/08.png'
+});
+</script>
 <nav class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-header">
     <!-- <a href="/" class="navbar-brand"><i class="fa fa-table fa-2x"></i><span class="brand-title">&nbsp;{{vm.navline.title}}</span></a> -->
-    <a href="/" class="navbar-brand" style="font-size:2em;color:white" ><i class="fa fa-home fa-lg"></i>{{'TITLE' | translate}}</a>
+    <a href="/" class="navbar-brand" style="font-size:2em;color:white" ><i class="fa fa-home fa-lg"></i><b>{{'TITLE' | translate}}</b><span style="font-size:60%">{{'ADD_TITLE' | translate}}</span></a>
     
     <a class="btn navbar-btn navbar-toggle" ng-click="isCollapsed = !isCollapsed">
       <span class="icon-bar"></span>
